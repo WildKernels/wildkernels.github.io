@@ -55,26 +55,13 @@
         }
         
         .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            display: block;
-            border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
-        }
-        
-        .title {
-            color: #4CAF50;
-            font-size: 2.5rem;
-            margin: 0 0 1rem 0;
-            font-weight: bold;
-        }
-        
-        .subtitle {
-            color: #b0b0b0;
-            font-size: 1.2rem;
-            margin: 0 0 2rem 0;
-        }
+             width: 200px;
+             height: 200px;
+             margin: 0 auto 3rem;
+             display: block;
+             border-radius: 50%;
+             box-shadow: 0 8px 30px rgba(76, 175, 80, 0.4);
+         }
         
         .redirect-message {
             color: #e0e0e0;
@@ -116,14 +103,15 @@
         }
         
         @media (max-width: 768px) {
-            .title {
-                font-size: 2rem;
-            }
-            
-            .redirect-container {
-                padding: 1.5rem;
-            }
-        }
+             .logo {
+                 width: 150px;
+                 height: 150px;
+             }
+             
+             .redirect-container {
+                 padding: 1.5rem;
+             }
+         }
     </style>
     
     <script>
@@ -138,11 +126,9 @@
 </head>
 <body>
     <div class="redirect-container">
-        <img src="WK.png" alt="Wild Kernels Logo" class="logo">
-        <h1 class="title">Wild Kernels</h1>
-        <p class="subtitle">Custom Android Kernels & Development</p>
-        
-        <div class="spinner"></div>
+         <img src="WK.png" alt="Wild Kernels Logo" class="logo">
+         
+         <div class="spinner"></div>
         
         <p class="redirect-message">
             Redirecting you to our GitHub organization...
