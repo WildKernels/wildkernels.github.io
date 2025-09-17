@@ -403,10 +403,11 @@ body {
 }
 
 .hero-logo {
-    height: 400px;
+    height: 25vh;
     width: auto;
-    max-width: 90vw;
-    max-height: 40vh;
+    max-width: 80vw;
+    max-height: 200px;
+    min-height: 80px;
     margin-bottom: 30px;
     filter: drop-shadow(0 0 15px rgba(88, 166, 255, 0.5));
     animation: pulse 2s infinite;
@@ -415,22 +416,24 @@ body {
 /* Responsive logo sizing */
 @media (max-width: 768px) {
     .hero-logo {
-        height: 250px;
-        max-height: 30vh;
+        height: 20vh;
+        max-height: 150px;
+        max-width: 70vw;
     }
 }
 
 @media (max-width: 480px) {
     .hero-logo {
-        height: 180px;
-        max-height: 25vh;
+        height: 15vh;
+        max-height: 120px;
+        max-width: 60vw;
     }
 }
 
 @media (max-height: 600px) {
     .hero-logo {
-        height: 150px;
-        max-height: 20vh;
+        height: 12vh;
+        max-height: 100px;
     }
 }
 
