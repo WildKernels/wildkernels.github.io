@@ -8,8 +8,11 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="WK.png">
     
+    <!-- Preload logo for faster display -->
+    <link rel="preload" as="image" href="WK.png">
+    
     <!-- Immediate redirect -->
-    <meta http-equiv="refresh" content="0; url=https://github.com/WildKernels">
+    <meta http-equiv="refresh" content="2; url=https://github.com/WildKernels">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://github.com/WildKernels">
@@ -126,7 +129,7 @@
 </head>
 <body>
     <div class="redirect-container">
-         <img src="WK.png" alt="Wild Kernels Logo" class="logo">
+         <img src="WK.png" alt="Wild Kernels Logo" class="logo" width="200" height="200" decoding="async" fetchpriority="high">
          
          <div class="spinner"></div>
         
