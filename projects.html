@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wild Kernels - Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1.1">
+</head>
+<body>
+    <header class="top-app-bar">
+        <div class="container">
+            <div class="branding">
+                <img src="logo.jpg" alt="Wild Kernels Logo" class="app-logo">
+                <h1 class="headline">Wild Kernels</h1>
+            </div>
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <div class="trailing-icons">
+                <span class="material-symbols-outlined" id="theme-toggle">dark_mode</span>
+                <a href="https://t.me/wildkernels" target="_blank" class="desktop-social-link" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://github.com/wildkernels" target="_blank" class="desktop-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="projects">
+            <div class="container">
+                <h3 class="headline-medium">Our Projects</h3>
+                <!-- Grid layout for projects -->
+                <div class="project-grid">
+                    
+                    <!-- Root -->
+                    <div class="card-elevated project-card">
+                        <div class="card-image-placeholder logo-container">
+                            <img src="logo.jpg" alt="Wild KSU" class="project-logo rounded-logo">
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title-large">Wild KSU</h4>
+                            <p class="body-medium">An advanced Kernel based root solution for Android.</p>
+                            <div class="card-actions">
+                                <a href="https://github.com/WildKernels/Wild_KSU/" target="_blank" class="btn-filled">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generic -->
+                    <div class="card-elevated project-card">
+                        <div class="card-image-placeholder logo-container">
+                            <img src="android.svg" alt="GKI KernelSU" class="project-logo">
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title-large">GKI 5.10+ Kernels</h4>
+                            <p class="body-medium">Generic Kernel Image (GKI) kernels with KernelSU & SUSFS support</p>
+                            <div class="card-actions">
+                                <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS" target="_blank" class="btn-filled">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OnePlus -->
+                    <div class="card-elevated project-card">
+                        <div class="card-image-placeholder logo-container">
+                            <img src="oneplus.svg" alt="OnePlus KernelSU" class="project-logo">
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title-large">OnePlus Kernels</h4>
+                            <p class="body-medium">Optimized kernels for OnePlus devices with KernelSU & SUSFS support</p>
+                            <p class="developer-info">Developer: <a href="https://github.com/fatalcoder524" target="_blank">fatalcoder524</a></p>
+                            <div class="card-actions">
+                                <a href="https://github.com/WildKernels/OnePlus_KernelSU_SUSFS" target="_blank" class="btn-filled">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sultan (Pixel) -->
+                    <div class="card-elevated project-card">
+                        <div class="card-image-placeholder logo-container">
+                            <img src="sultan.jpg" alt="Sultan Kernels" class="project-logo rounded-logo">
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title-large">Sultan Kernels</h4>
+                            <p class="body-medium">Sultan kernels for Pixel 6-9 series with KernelSU & SUSFS integration.</p>
+                            <div class="card-actions">
+                                <a href="https://github.com/WildKernels/Sultan_KernelSU_SUSFS" target="_blank" class="btn-filled">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WIP (Samsung) -->
+                    <div class="card-elevated project-card">
+                        <div class="card-image-placeholder logo-container">
+                            <img src="samsung.svg" alt="Samsung KernelSU" class="project-logo">
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title-large">Samsung Kernels</h4>
+                            <p class="body-medium">Work in Progress. Kernels for Samsung devices with KernelSU & SUSFS support</p>
+                            <div class="card-actions">
+                                <a href="https://github.com/WildKernels/Samsung_KernelSU_SUSFS" target="_blank" class="btn-filled">GitHub (WIP)</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="fab-container">
+        <a href="https://github.com/wildkernels" target="_blank" class="fab-secondary" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://t.me/wildkernels" target="_blank" class="fab-primary" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined icon">home</span>
+            <span class="label">Home</span>
+        </a>
+        <a href="projects.html" class="nav-item active">
+            <span class="material-symbols-outlined icon">grid_view</span>
+            <span class="label">Projects</span>
+        </a>
+        <a href="contact.html" class="nav-item">
+            <span class="material-symbols-outlined icon">mail</span>
+            <span class="label">Contact</span>
+        </a>
+    </nav>
+
+    <script src="script.js?v=1.1"></script>
+</body>
+</html>

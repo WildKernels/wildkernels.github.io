@@ -1,0 +1,659 @@
+/* Material Design 3 Token Implementation */
+:root {
+    /* Color Palette - Seed: Green/Teal */
+    --md-sys-color-primary: #006c4c;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #89f8c7;
+    --md-sys-color-on-primary-container: #002114;
+    
+    --md-sys-color-secondary: #4d6357;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-secondary-container: #d0e8d8;
+    --md-sys-color-on-secondary-container: #0a1f16;
+    
+    --md-sys-color-tertiary: #3d648f;
+    --md-sys-color-on-tertiary: #ffffff;
+    --md-sys-color-tertiary-container: #d3e3ff;
+    --md-sys-color-on-tertiary-container: #001c3a;
+
+    --md-sys-color-background: #fbfdf9;
+    --md-sys-color-on-background: #191c1a;
+    
+    --md-sys-color-surface: #fbfdf9;
+    --md-sys-color-on-surface: #191c1a;
+    
+    --md-sys-color-surface-variant: #dbe5de;
+    --md-sys-color-on-surface-variant: #404943;
+    
+    --md-sys-color-outline: #707973;
+
+    /* Scrolled Surface Color (Light Mode Default) */
+    /* Set to same as surface color to prevent dimming/tinting in light mode */
+    --md-sys-color-surface-scrolled: #fbfdf9; 
+    
+    /* Elevation */
+    --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+
+    /* Shape */
+    --md-sys-shape-corner-small: 8px;
+    --md-sys-shape-corner-medium: 12px;
+    --md-sys-shape-corner-large: 16px;
+    --md-sys-shape-corner-full: 9999px;
+
+    /* Typography */
+    --md-sys-typescale-display-large-font: 'Roboto', sans-serif;
+    --md-sys-typescale-display-large-size: 57px;
+    --md-sys-typescale-display-large-weight: 400;
+
+    --md-sys-typescale-headline-medium-font: 'Roboto', sans-serif;
+    --md-sys-typescale-headline-medium-size: 28px;
+    --md-sys-typescale-headline-medium-weight: 400;
+
+    --md-sys-typescale-body-large-font: 'Roboto', sans-serif;
+    --md-sys-typescale-body-large-size: 16px;
+    --md-sys-typescale-body-large-weight: 400;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+    --md-sys-color-primary: #6cdbac;
+    --md-sys-color-on-primary: #003825;
+    --md-sys-color-primary-container: #005138;
+    --md-sys-color-on-primary-container: #89f8c7;
+    
+    --md-sys-color-secondary: #b4ccbd;
+    --md-sys-color-on-secondary: #1f352a;
+    --md-sys-color-secondary-container: #354b3f;
+    --md-sys-color-on-secondary-container: #d0e8d8;
+
+    --md-sys-color-background: #191c1a;
+    --md-sys-color-on-background: #e1e3df;
+    
+    --md-sys-color-surface: #191c1a;
+    --md-sys-color-on-surface: #e1e3df;
+    
+    --md-sys-color-surface-variant: #404943;
+    --md-sys-color-on-surface-variant: #c0c9c2;
+    
+    --md-sys-color-outline: #8a938c;
+
+    /* Scrolled Surface Color (Dark Mode) */
+    --md-sys-color-surface-scrolled: #202522; /* Dark elevation tint */
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    padding-bottom: 80px; /* Space for Bottom Nav */
+    padding-top: 64px; /* Space for Top App Bar */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Desktop Layout Tweaks */
+@media (min-width: 840px) {
+    body {
+        padding-bottom: 0;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Top App Bar */
+.top-app-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.top-app-bar.scrolled {
+    background-color: var(--md-sys-color-surface-scrolled); /* Uses dynamic variable */
+    box-shadow: var(--md-sys-elevation-2);
+}
+
+.top-app-bar .container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Branding (Logo + Text) */
+.branding {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.app-logo {
+    height: 40px;
+    width: auto;
+    border-radius: 8px; /* Optional: Softens logo corners */
+}
+
+.headline {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: none;
+    gap: 8px;
+}
+
+.desktop-nav .nav-link {
+    text-decoration: none;
+    color: var(--md-sys-color-on-surface-variant);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.desktop-nav .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.desktop-nav .nav-link.active {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+@media (min-width: 840px) {
+    .desktop-nav {
+        display: flex;
+    }
+}
+
+/* Trailing Icons & Desktop Socials */
+.trailing-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trailing-icons span, 
+.desktop-social-link {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; /* Increased from 44px */
+    height: 48px; /* Increased from 44px */
+    transition: background-color 0.2s;
+}
+
+.trailing-icons span:hover,
+.desktop-social-link:hover {
+    background-color: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-primary);
+}
+
+.desktop-social-link i, .trailing-icons span {
+    font-size: 24px; /* Increased from 20px */
+}
+
+/* Hide desktop socials on mobile */
+.desktop-social-link {
+    display: none;
+}
+
+@media (min-width: 840px) {
+    .desktop-social-link {
+        display: flex;
+    }
+}
+
+
+/* Bottom Navigation (Mobile) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: var(--md-sys-color-surface);
+    border-top: none;
+    /* Default shadow (Elevation 1 equivalent for bottom) */
+    box-shadow: 0 -1px 3px 1px rgba(0, 0, 0, 0.15); 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+/* Scrolled state for Bottom Nav */
+.bottom-nav.scrolled {
+    background-color: var(--md-sys-color-surface-scrolled);
+    /* Elevation 2 equivalent for bottom */
+    box-shadow: 0 -2px 6px 2px rgba(0, 0, 0, 0.15); 
+}
+
+@media (min-width: 840px) {
+    .bottom-nav {
+        display: none;
+    }
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--md-sys-color-on-surface-variant);
+    width: 64px;
+    height: 100%;
+}
+
+.bottom-nav .nav-item .icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    padding: 4px 20px;
+    border-radius: 16px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.bottom-nav .nav-item .label {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.bottom-nav .nav-item.active .icon {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.bottom-nav .nav-item.active .label {
+    color: var(--md-sys-color-on-surface);
+}
+
+/* FAB Container & Buttons */
+.fab-container {
+    position: fixed;
+    bottom: 96px; /* Above bottom nav */
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1000;
+}
+
+.fab-primary, .fab-secondary {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: var(--md-sys-elevation-3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 24px;
+}
+
+/* Telegram FAB (Primary) */
+.fab-primary {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+/* GitHub FAB (Secondary) */
+.fab-secondary {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    /* Make equal size to Primary FAB */
+    width: 56px; 
+    height: 56px;
+    align-self: center;
+}
+
+.fab-primary:hover, .fab-secondary:hover {
+    box-shadow: 0px 6px 10px 4px rgba(0,0,0,0.15);
+}
+
+.fab-primary i, .fab-secondary i {
+    font-size: 32px; /* Increased icon size inside FABs */
+}
+
+.fab-primary:active, .fab-secondary:active {
+    transform: scale(0.95);
+}
+
+@media (min-width: 840px) {
+    .fab-container {
+        display: none; /* Hide FABs on desktop */
+    }
+}
+
+/* Typography Classes */
+.display-large {
+    font-family: var(--md-sys-typescale-display-large-font);
+    font-size: var(--md-sys-typescale-display-large-size);
+    font-weight: var(--md-sys-typescale-display-large-weight);
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.headline-medium {
+    font-family: var(--md-sys-typescale-headline-medium-font);
+    font-size: var(--md-sys-typescale-headline-medium-size);
+    font-weight: var(--md-sys-typescale-headline-medium-weight);
+    margin-bottom: 24px;
+}
+
+.body-large {
+    font-family: var(--md-sys-typescale-body-large-font);
+    font-size: var(--md-sys-typescale-body-large-size);
+    font-weight: var(--md-sys-typescale-body-large-weight);
+    opacity: 0.8;
+}
+
+/* Components: Cards */
+.card-elevated {
+    background-color: var(--md-sys-color-surface-variant); /* Slightly darker than surface */
+    border-radius: var(--md-sys-shape-corner-medium);
+    box-shadow: var(--md-sys-elevation-1);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-elevated:hover {
+    box-shadow: var(--md-sys-elevation-2);
+}
+
+.card-image-placeholder {
+    height: 160px;
+    background-color: var(--md-sys-color-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--md-sys-color-on-surface-variant);
+    filter: brightness(0.9);
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: flex-end;
+}
+
+.card-outlined {
+    background-color: var(--md-sys-color-surface);
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: var(--md-sys-shape-corner-medium);
+    padding: 16px;
+}
+
+.card-filled {
+    background-color: var(--md-sys-color-surface-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Contact Page Specifics (Removed duplicate) */
+
+.avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 16px;
+    border: 4px solid var(--md-sys-color-surface);
+    box-shadow: var(--md-sys-elevation-1);
+}
+
+.contact-card .btn-filled,
+.contact-card .btn-outlined {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    text-decoration: none;
+}
+
+/* Ensure padding is consistent in contact grid context */
+.contact-grid .card-filled,
+.contact-grid .card-outlined {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    height: 100%; /* Ensure equal height */
+    justify-content: center;
+}
+
+/* Buttons */
+.btn-filled {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    transition: box-shadow 0.2s;
+    text-decoration: none; /* Remove underline */
+}
+
+.btn-filled:hover {
+    box-shadow: var(--md-sys-elevation-1);
+    background-image: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08));
+}
+
+.btn-outlined {
+    background-color: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-primary);
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none; /* Remove underline */
+}
+
+.btn-text {
+    background: transparent;
+    border: none;
+    color: var(--md-sys-color-primary);
+    padding: 10px 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.btn-text:hover {
+    background-color: rgba(0, 108, 76, 0.08); /* Primary color at 8% opacity */
+}
+
+/* Sections */
+section {
+    padding: 48px 0;
+}
+
+#hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* WIP Card Styling */
+.card-wip {
+    border: 1px dashed var(--md-sys-color-outline);
+    background-color: transparent;
+}
+
+.card-wip .card-image-placeholder {
+    background-color: transparent;
+    color: var(--md-sys-color-outline);
+}
+
+.card-wip .title-large, .card-wip .body-medium {
+    opacity: 0.7;
+}
+
+/* Contact Page Specifics */
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.project-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+}
+
+/* Developer Info */
+.developer-info {
+    font-size: 14px;
+    margin-top: 8px;
+    opacity: 0.9;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.developer-info a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.developer-info a:hover {
+    text-decoration: underline;
+    color: var(--md-sys-color-primary);
+}
+
+.contact-card, .project-card {
+    text-align: center;
+    flex: 1;
+    min-width: 300px;
+    max-width: 480px;
+    height: 100%; /* Ensure full height in grid */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Override constraints for project items to prevent stretching */
+.project-grid .project-card {
+    flex: 0 1 350px; /* Do not grow, shrink if needed, base width 350px */
+    width: 350px; /* Enforce width */
+    max-width: 350px; /* Prevent stretching beyond this */
+}
+
+.project-card .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px; /* Slight adjustment */
+}
+
+.project-card .card-actions {
+    margin-top: auto;
+    padding-top: 32px; /* Add extra space between text and button */
+    justify-content: flex-end; /* Align button to bottom right */
+}
+
+@media (max-width: 839px) {
+    .project-card .card-actions {
+        justify-content: center;
+    }
+}
+
+/* Project Page Specifics */
+.logo-container {
+    height: 160px;
+    background-color: var(--md-sys-color-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.project-logo {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    padding: 24px;
+}
+
+.rounded-logo {
+    width: 112px; /* 160px container - 24px padding * 2 = 112px visual size */
+    height: 112px;
+    padding: 0;
+    border-radius: 22px; /* ~20% of 112px */
+    object-fit: cover; /* Ensure image fills the rounded area */
+}
+
+/* Developer Info */
+.developer-info {
+    font-size: 14px;
+    margin-top: 8px;
+    opacity: 0.9;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.developer-info a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.developer-info a:hover {
+    text-decoration: underline;
+    color: var(--md-sys-color-primary);
+}
