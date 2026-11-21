@@ -4,80 +4,58 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Docs — Wild Kernels</title>
-<meta name="description" content="Wild Kernels documentation: install a GKI kernel with Kernel Flasher or magiskboot, post-install checks, every feature in the build, and every Build Kernels option.">
-<meta name="theme-color" content="#0c0e0c">
+<meta name="description" content="How to install a Wild Kernels build: Kernel Flasher or magiskboot, post-install checks, every feature in the image, and every Build Kernels option.">
+<meta name="theme-color" content="#04100d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Wild Kernels — documentation">
-<meta property="og:image" content="https://wildkernels.dev/assets/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/showcase.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
 
-<header class="site-head">
-  <div class="wrap head-in">
-    <a class="brand" href="index.html" aria-label="Wild Kernels home">
-      <img src="logo.jpg" alt="" width="34" height="34">
-      <span><b>Wild Kernels</b><span>wildkernels.dev</span></span>
-    </a>
-    <nav class="nav" aria-label="Sections">
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="index.html"><img src="logo.jpg" alt="">Wild Kernels</a>
+    <nav>
       <a href="builds.html">Builds</a>
       <a href="docs.html" aria-current="page">Docs</a>
       <a href="projects.html">Projects</a>
-      <a href="contact.html">Community</a>
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
     </nav>
-    <div class="head-cta">
-      <a class="btn btn-sm" href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-sm btn-gold" href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
-    </div>
-    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="sheet"><span></span><span></span><span></span></button>
+    <a class="btn primary sm" href="builds.html">Downloads</a>
   </div>
 </header>
-<div class="sheet" id="sheet">
-  <a href="builds.html">Builds <small>629 files</small></a>
-  <a href="docs.html">Docs <small>install</small></a>
-  <a href="projects.html">Projects <small>19 repos</small></a>
-  <a href="contact.html">Community <small>telegram</small></a>
-  <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub <small>source</small></a>
+
+<div class="wrap page-head">
+  <p class="kicker">Documentation</p>
+  <h1>Read this before you flash.</h1>
+  <p>The same guides that live in the wiki, in one place: how to pick the right image, how to flash it with or without a PC, what to check afterwards, and what every build option does.</p>
 </div>
 
-<main id="main">
-  <div class="wrap page-head">
-    <p class="kicker"><span class="num">04</span> Documentation</p>
-    <h1>Read this before you flash.</h1>
-    <p class="lead">The same guides that live in the wiki, kept in one place: how to pick the right image, how to flash it with or without a PC, what to check afterwards, and what every build option actually does.</p>
-  </div>
-
-  <section class="paper">
-    <div class="wrap docs-layout">
-      <nav class="toc" aria-label="Contents">
+<div class="wrap docs-layout">
+  <nav class="toc" aria-label="Contents">
 <h4>On this page</h4><ol>
-<li><a href="#risk">Before anything</a></li>
-<li><a href="#install">Installation</a>
+<li><a href="#before">Before anything</a></li>
+<li><a href="#install">Installation</a></li>
 <ol>
 <li><a class="sub" href="#install-choose-your-method">Choose your method</a></li>
 <li><a class="sub" href="#install-prerequisites">Prerequisites</a></li>
 <li><a class="sub" href="#install-after-flashing">After flashing</a></li>
 <li><a class="sub" href="#install-other-methods">Other methods</a></li>
 </ol>
-</li>
-<li><a href="#kernelflasher">Kernel Flasher</a>
+<li><a href="#kernelflasher">Kernel Flasher</a></li>
 <ol>
 <li><a class="sub" href="#kernelflasher-prerequisites">Prerequisites</a></li>
 <li><a class="sub" href="#kernelflasher-steps">Steps</a></li>
 <li><a class="sub" href="#kernelflasher-supported-flashing-apps">Supported flashing apps</a></li>
 <li><a class="sub" href="#kernelflasher-after-flashing">After flashing</a></li>
 </ol>
-</li>
-<li><a href="#magiskboot">magiskboot</a>
+<li><a href="#magiskboot">magiskboot</a></li>
 <ol>
 <li><a class="sub" href="#magiskboot-preparation">Preparation</a></li>
 </ol>
-</li>
-<li><a href="#postinstall">Post-install</a>
+<li><a href="#postinstall">Post-install</a></li>
 <ol>
 <li><a class="sub" href="#postinstall-1-download-matching-manager-kernelsu-kernelsu-next-resukisu">1. Download matching manager — KernelSU / KernelSU-Next / ReSukiSU</a></li>
 <li><a class="sub" href="#postinstall-2-susfs">2. SUSFS</a></li>
@@ -85,8 +63,7 @@
 <li><a class="sub" href="#postinstall-4-droidspaces">4. DroidSpaces</a></li>
 <li><a class="sub" href="#postinstall-5-troubleshooting">5. Troubleshooting</a></li>
 </ol>
-</li>
-<li><a href="#features">Features</a>
+<li><a href="#features">Features</a></li>
 <ol>
 <li><a class="sub" href="#features-root-implementations">Root Implementations</a></li>
 <li><a class="sub" href="#features-root-hiding">Root Hiding</a></li>
@@ -97,8 +74,7 @@
 <li><a class="sub" href="#features-performance">Performance</a></li>
 <li><a class="sub" href="#features-container-runtime">Container Runtime</a></li>
 </ol>
-</li>
-<li><a href="#configure">Configure a build</a>
+<li><a href="#configure">Configure a build</a></li>
 <ol>
 <li><a class="sub" href="#configure-scope">Scope</a></li>
 <li><a class="sub" href="#configure-sources">Sources</a></li>
@@ -106,20 +82,18 @@
 <li><a class="sub" href="#configure-protections-amp-subsystems">Protections &amp; subsystems</a></li>
 <li><a class="sub" href="#configure-build-behavior">Build behavior</a></li>
 </ol>
-</li>
-<li><a href="#more">Elsewhere</a></li>
 </ol>
-      </nav>
-      <div class="doc-body">
-        <section id="risk">
-          <h2>Before anything</h2>
-          <p class="dek">00 / the one paragraph everybody skips</p>
-          <div class="callout">
-            <p><strong>Flashing a kernel can brick your device.</strong> Back up your data and at minimum keep an untouched <code>boot.img</code> you can fastboot back. Everything here is provided as-is, with no warranty — Wild Kernels is not responsible for damage, data loss or voided warranties.</p>
-          </div>
-          <p>Two things decide whether a build boots: the <strong>kernel version</strong> your phone currently runs, and the <strong>root flavor</strong> your manager speaks. Get either wrong and the phone will bootloop or the manager will report a version mismatch. Both are checked in the guides below.</p>
-        </section>
-        <section id="install">
+        </nav>
+  <div class="doc-body">
+    <section id="before">
+      <h2>Before anything</h2>
+      <p class="dek">00 / the one paragraph everybody skips</p>
+      <div class="callout">
+        <p><strong>Flashing a kernel can brick your device.</strong> Back up your data and keep an untouched <code>boot.img</code> you can fastboot back. Everything here is provided as-is — Wild Kernels is not responsible for damage, data loss or voided warranties.</p>
+      </div>
+      <p>Two things decide whether a build boots: the <strong>kernel version</strong> your phone currently runs, and the <strong>root flavour</strong> your manager speaks. Get either wrong and the phone bootloops or the manager reports a version mismatch. Both are covered below.</p>
+    </section>
+<section id="install">
 <h2>Installation</h2>
 <p class="dek">01 / Two paths: you already have root, or you patch boot.img yourself.</p>
 <div class="callout"><p><strong>Caution.</strong> Wild Kernels is not responsible for bricked devices or damage. By flashing, you assume all risk. Back up your data and understand the risks before flashing.</p></div>
@@ -642,61 +616,33 @@ All options below are the dispatch inputs with their defaults.</p>
 </ul>
 </section>
 
-        <section id="more">
-          <h2>Elsewhere</h2>
-          <p class="dek">07 / source, builds, support</p>
-          <ul>
-            <li><a href="builds.html">Build browser</a> — every image, filterable.</li>
-            <li><a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">GitHub releases</a> — the canonical download page.</li>
-            <li><a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/wiki">Upstream wiki</a> — same guides, GitHub-rendered.</li>
-            <li><a href="contact.html">Community</a> — the Telegram group for support.</li>
-          </ul>
-          <p class="muted" style="font-size:13px;margin-top:18px">Portions of this documentation are adapted from the official KernelSU documentation.</p>
-        </section>
-      </div>
-    </div>
-  </section>
-</main>
+    <section id="more">
+      <h2>Elsewhere</h2>
+      <p class="dek">07 / source, builds, support</p>
+      <ul>
+        <li><a href="builds.html">Build browser</a> — every image, filterable.</li>
+        <li><a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">GitHub releases</a> — the canonical download page.</li>
+        <li><a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/wiki">Upstream wiki</a> — same guides, GitHub-rendered.</li>
+        <li><a href="https://t.me/WildKernels">Telegram group</a> — support, in public.</li>
+      </ul>
+      <p style="color:var(--dim-2);font-size:13px;margin-top:18px">Portions of this documentation are adapted from the official KernelSU documentation.</p>
+    </section>
+  </div>
+</div>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-mark" aria-hidden="true">Wild Kernels</div>
-    <div class="foot-cols">
-      <div>
-        <h4>Wild Kernels</h4>
-        <p>Custom Android kernels with KernelSU &amp; SUSFS. Built from AOSP, OnePlus, Samsung and Sultan sources. Everything is GPL-3.0 and built in public GitHub Actions.</p>
-      </div>
-      <div>
-        <h4>Docs</h4>
-        <a href="#install">Installation</a>
-        <a href="#magiskboot">magiskboot</a>
-        <a href="#postinstall">Post-install</a>
-        <a href="#configure">Build options</a>
-      </div>
-      <div>
-        <h4>Projects</h4>
-        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS">GKI</a>
-        <a href="https://github.com/WildKernels/OnePlus_KernelSU_SUSFS">OnePlus</a>
-        <a href="https://github.com/WildKernels/Samsung_KernelSU_SUSFS">Samsung</a>
-        <a href="https://github.com/WildKernels/Sultan_KernelSU_SUSFS">Sultan / Pixel</a>
-      </div>
-      <div>
-        <h4>Elsewhere</h4>
-        <a href="https://t.me/WildKernels">Telegram group</a>
-        <a href="https://t.me/TheWildJames">@TheWildJames</a>
-        <a href="https://github.com/WildKernels">GitHub</a>
-        <a href="contact.html">Contact &amp; support</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>GPL-3.0 · upstream credits to KernelSU, susfs4ksu, AnyKernel3, DroidSpaces, Baseband Guard and Sultan.</span>
-      <span>Not responsible for bricked devices. Back up first.</span>
-    </div>
+  <div class="wrap foot">
+    <span>Wild Kernels · GPL-3.0 · built in public</span>
+    <span class="links">
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
+      <a href="builds.html">Builds</a>
+      <a href="projects.html">Projects</a>
+    </span>
   </div>
 </footer>
 
-<a class="to-top" href="#main" aria-label="Back to top">↑</a>
-<script src="data.js"></script>
-<script src="assets/site.js"></script>
+<script src="stats.js"></script>
+<script src="assets/showcase.js"></script>
 </body>
 </html>

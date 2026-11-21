@@ -4,154 +4,118 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects — Wild Kernels</title>
-<meta name="description" content="Every Wild Kernels repository: GKI, OnePlus, Samsung and Sultan/Pixel kernel trees, kernel patches, magiskboot builds, Wild Detector and the root fork lineage.">
-<meta name="theme-color" content="#0c0e0c">
+<meta name="description" content="The Wild Kernels repositories: GKI, OnePlus, Samsung and Sultan/Pixel kernel trees, patch sets, magiskboot builds and tooling.">
+<meta name="theme-color" content="#04100d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Wild Kernels — projects">
-<meta property="og:description" content="Four kernel trees and the tooling around them, with live star counts and last-push dates.">
-<meta property="og:image" content="https://wildkernels.dev/assets/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/showcase.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
 
-<header class="site-head">
-  <div class="wrap head-in">
-    <a class="brand" href="index.html" aria-label="Wild Kernels home">
-      <img src="logo.jpg" alt="" width="34" height="34">
-      <span><b>Wild Kernels</b><span>wildkernels.dev</span></span>
-    </a>
-    <nav class="nav" aria-label="Sections">
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="index.html"><img src="logo.jpg" alt="">Wild Kernels</a>
+    <nav>
       <a href="builds.html">Builds</a>
       <a href="docs.html">Docs</a>
       <a href="projects.html" aria-current="page">Projects</a>
-      <a href="contact.html">Community</a>
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
     </nav>
-    <div class="head-cta">
-      <a class="btn btn-sm" href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-sm btn-wire" href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
-    </div>
-    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="sheet"><span></span><span></span><span></span></button>
+    <a class="btn primary sm" href="builds.html">Downloads</a>
   </div>
 </header>
-<div class="sheet" id="sheet">
-  <a href="builds.html">Builds <small>629 files</small></a>
-  <a href="docs.html">Docs <small>install</small></a>
-  <a href="projects.html">Projects <small>19 repos</small></a>
-  <a href="contact.html">Community <small>telegram</small></a>
-  <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub <small>source</small></a>
+
+<div class="wrap page-head">
+  <p class="kicker">Repositories</p>
+  <h1>Four trees, one toolchain.</h1>
+  <p>Kernel source built on AOSP common, OnePlus OSS, Samsung manifests and kerneltoast's Pixel trees — plus the patches, packaging and tooling around them.</p>
 </div>
 
-<main id="main">
+<section>
   <div class="wrap">
-    <div class="page-head">
-      <p class="kicker"><span class="num">03</span> Repositories</p>
-      <h1>Four trees, one toolchain.</h1>
-      <p class="lead">Kernel source built on AOSP common, OnePlus OSS, Samsung manifests and kerneltoast's Pixel trees. Around them sit the patches, the AnyKernel3 packaging, the metamodules and a couple of tools we needed and nobody else had written.</p>
-    </div>
-
-    <div class="bgrid" style="grid-template-columns:repeat(2,minmax(0,1fr));padding-top:34px;gap:16px">
+    <div class="cards">
       <a class="card" href="https://github.com/WildKernels/GKI_KernelSU_SUSFS" target="_blank" rel="noopener">
         <div class="card-top">
-          <img class="card-logo" src="android.svg" alt="" width="42" height="42">
+          <img src="android.svg" alt="">
           <div><h3>GKI_KernelSU_SUSFS</h3><div class="sub">The main tree</div></div>
         </div>
-        <p>GKI 2.0 kernels from 5.10 to 6.12 — 5 Android targets, 3 root flavors, every sublevel since 2022. Build Kernels dispatch lets anyone fork and build a variant for themselves.</p>
-        <div class="card-meta">
-          <span class="pill hot">★ 1,764</span><span class="pill">⑂ 6,264 forks</span><span class="pill">629 files in r22</span><span class="pill">GPL-3.0</span>
-        </div>
+        <p>GKI 2.0 kernels from 5.10 to 6.12 across five Android targets and three root flavours. Fork it and run Build Kernels to get your own variant.</p>
+        <div class="pills"><span class="pill hot">★ 1,764</span><span class="pill">629 files in r22</span><span class="pill">GPL-3.0</span></div>
       </a>
       <a class="card" href="https://github.com/WildKernels/OnePlus_KernelSU_SUSFS" target="_blank" rel="noopener">
         <div class="card-top">
-          <img class="card-logo" src="oneplus.svg" alt="" width="42" height="42">
+          <img src="oneplus.svg" alt="">
           <div><h3>OnePlus_KernelSU_SUSFS</h3><div class="sub">Oppo · Realme</div></div>
         </div>
-        <p>Per-device builds from OnePlus OSS: SCX schedulers for SM8750/MT6991, BBRv1/v3, CAKE and PIE, LTO, TTL, IP Set, Unicode bypass fix and Droidspaces containers. Maintained by fatalcoder524.</p>
-        <div class="card-meta">
-          <span class="pill hot">★ 749</span><span class="pill">⑂ 896</span><span class="pill">v2.4.0-r1</span>
-        </div>
+        <p>Per-device builds from OnePlus OSS: SCX schedulers, BBRv1/v3, CAKE and PIE qdiscs, LTO, TTL, IP Set and Droidspaces containers. Maintained by fatalcoder524.</p>
+        <div class="pills"><span class="pill hot">★ 749</span><span class="pill">v2.4.0-r1</span><span class="pill">169 files</span></div>
       </a>
       <a class="card" href="https://github.com/WildKernels/Samsung_KernelSU_SUSFS" target="_blank" rel="noopener">
         <div class="card-top">
-          <img class="card-logo" src="samsung.svg" alt="" width="42" height="42">
+          <img src="samsung.svg" alt="">
           <div><h3>Samsung_KernelSU_SUSFS</h3><div class="sub">Galaxy S · A · Tab</div></div>
         </div>
-        <p>Samsung sources and manifests across One UI 6 through 8.5, with the feature set spelled out in each filename so you know exactly what is compiled in. Maintained by jimsterino98.</p>
-        <div class="card-meta">
-          <span class="pill hot">★ 60</span><span class="pill">⑂ 56</span><span class="pill">2.3.0-r6</span>
-        </div>
+        <p>Samsung sources and manifests across One UI 6 to 8.5, with the feature set spelled out in each filename. Maintained by jimsterino98.</p>
+        <div class="pills"><span class="pill hot">★ 61</span><span class="pill">2.3.0-r6</span><span class="pill">62 files</span></div>
       </a>
       <a class="card" href="https://github.com/WildKernels/Sultan_KernelSU_SUSFS" target="_blank" rel="noopener">
         <div class="card-top">
-          <img class="card-logo round" src="sultan.jpg" alt="" width="42" height="42">
+          <img src="sultan.jpg" alt="">
           <div><h3>Sultan_KernelSU_SUSFS</h3><div class="sub">Tensor · Pixel 6–9</div></div>
         </div>
-        <p>kerneltoast's trees with Wild KSU + SUSFS, shipping rooted and stock variants for zuma, zumapro and gs201 so you can compare without reflashing stock firmware.</p>
-        <div class="card-meta">
-          <span class="pill hot">★ 189</span><span class="pill">⑂ 142</span><span class="pill">v2.0.0-r12</span>
-        </div>
+        <p>kerneltoast's trees with Wild KSU and SUSFS, shipping rooted and stock variants for zuma, zumapro and gs201 side by side.</p>
+        <div class="pills"><span class="pill hot">★ 189</span><span class="pill">v2.0.0-r12</span><span class="pill">6 files</span></div>
       </a>
     </div>
+  </div>
+</section>
 
-    <div class="sec-head" style="margin-top:66px">
+<section>
+  <div class="wrap">
+    <div class="sec-head">
       <div>
-        <p class="kicker"><span class="num">03.1</span> Everything else</p>
-        <h2 class="h2" style="margin-top:14px;font-size:clamp(24px,3vw,36px)">The parts nobody sees</h2>
+        <h2 class="sec-t">Everything else in the org</h2>
+        <p class="sec-d">Live from the GitHub API — stars, forks and the last push for every public repository.</p>
       </div>
-      <p class="muted" style="font-size:14px;max-width:36ch">Live from the GitHub API — stars, forks and the last push for every public repository in the org.</p>
     </div>
     <div class="repo-table" id="repo-table"></div>
-
-    <div class="callout note" style="margin-top:34px;margin-bottom:70px">
-      <p><strong>Building your own?</strong> Fork GKI_KernelSU_SUSFS and run <em>Build Kernels</em> from the Actions tab — pick one kernel line, one root flavor and only the features you want. The wiki's <a href="docs.html#configure" style="color:inherit;border-bottom:1px solid currentColor">Configure a Build</a> page explains every input.</p>
-    </div>
   </div>
-</main>
+</section>
 
 <footer>
-  <div class="wrap">
-    <svg class="foot-mark" viewBox="0 0 1000 112" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <text x="0" y="96" textLength="1000" lengthAdjust="spacingAndGlyphs">WILD KERNELS</text>
-    </svg>
-    <div class="foot-cols">
-      <div>
-        <h4>Wild Kernels</h4>
-        <p>Custom Android kernels with KernelSU &amp; SUSFS. Built from AOSP, OnePlus, Samsung and Sultan sources. Everything is GPL-3.0 and built in public GitHub Actions.</p>
-      </div>
-      <div>
-        <h4>Builds</h4>
-        <a href="builds.html">Browse builds</a>
-        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Latest release</a>
-        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/actions">CI runs</a>
-        <a href="docs.html">Install guide</a>
-      </div>
-      <div>
-        <h4>Projects</h4>
-        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS">GKI</a>
-        <a href="https://github.com/WildKernels/OnePlus_KernelSU_SUSFS">OnePlus</a>
-        <a href="https://github.com/WildKernels/Samsung_KernelSU_SUSFS">Samsung</a>
-        <a href="https://github.com/WildKernels/Sultan_KernelSU_SUSFS">Sultan / Pixel</a>
-      </div>
-      <div>
-        <h4>Elsewhere</h4>
-        <a href="https://t.me/WildKernels">Telegram group</a>
-        <a href="https://t.me/TheWildJames">@TheWildJames</a>
-        <a href="https://github.com/WildKernels">GitHub</a>
-        <a href="contact.html">Contact &amp; support</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>GPL-3.0 · upstream credits to KernelSU, susfs4ksu, AnyKernel3, DroidSpaces, Baseband Guard and Sultan.</span>
-      <span>Not responsible for bricked devices. Back up first.</span>
-    </div>
+  <div class="wrap foot">
+    <span>Wild Kernels · GPL-3.0 · built in public</span>
+    <span class="links">
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
+      <a href="docs.html">Docs</a>
+      <a href="builds.html">Builds</a>
+    </span>
   </div>
 </footer>
 
-<a class="to-top" href="#main" aria-label="Back to top">↑</a>
 <script src="data.js"></script>
-<script src="assets/site.js"></script>
+<script src="stats.js"></script>
+<script src="assets/showcase.js"></script>
+<script>
+  (function () {
+    var t = document.getElementById("repo-table");
+    if (!t || !window.WK || !window.WK.org) return;
+    var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    t.innerHTML = window.WK.org.filter(function (r) { return r.name !== "wildkernels.github.io"; }).map(function (r) {
+      var badge = r.archived ? '<span class="badge">archived</span>' :
+                  r.fork ? '<span class="badge fork">fork</span>' : '<span class="badge active">active</span>';
+      return '<a class="repo-row" href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
+        '<span class="rname">' + esc(r.name) + (r.desc ? '<small>' + esc(r.desc) + '</small>' : '') + '</span>' +
+        '<span class="rstat lang">' + esc(r.lang || "—") + '</span>' +
+        '<span class="rstat">★ <b>' + fmt(r.stars) + '</b></span>' +
+        '<span class="rstat">⑂ <b>' + fmt(r.forks) + '</b></span>' +
+        badge + '</a>';
+    }).join("");
+  })();
+</script>
 </body>
 </html>

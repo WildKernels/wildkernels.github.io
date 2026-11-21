@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E — Showcase · Wild Kernels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#04100d; --card:#0a1d18; --line:rgba(180,255,215,.13);
+    --fg:#eef6f1; --dim:#a3b6ac; --dim-2:#7f948a;
+    --lime:#b9f24d; --mint:#6fe0b0;
+    --s:"Sora",system-ui,sans-serif; --b:"Inter",system-ui,sans-serif; --m:"JetBrains Mono",monospace;
+  }
+  html{overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);font-family:var(--b);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+  header{position:sticky;top:0;z-index:30;background:rgba(4,16,13,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;gap:24px;padding-block:14px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--s);font-weight:600;font-size:15.5px}
+  .logo img{width:32px;height:32px;border-radius:9px;object-fit:cover;background:#f4f1e6;padding:2px}
+  .bar nav{margin-left:auto;display:flex;gap:22px;font-size:14.5px;color:var(--dim)}
+  .bar nav a:hover{color:var(--fg)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;border:1px solid var(--line);
+       padding:12px 18px;min-height:46px;font-size:15px;font-weight:500;transition:.15s}
+  .btn:hover{background:rgba(255,255,255,.05)}
+  .btn.primary{background:var(--lime);border-color:var(--lime);color:#0b1a07;font-weight:600}
+  .btn.primary:hover{background:#caff63;box-shadow:0 12px 34px -14px rgba(185,242,77,.6)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding-block:76px 40px;overflow:clip}
+  .hero .glow{position:absolute;width:640px;height:640px;right:-180px;top:-220px;border-radius:50%;
+              background:radial-gradient(circle,rgba(185,242,77,.13),transparent 65%);filter:blur(20px)}
+  .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:center}
+  .kicker{font-family:var(--m);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint)}
+  .hero h1{font-family:var(--s);font-size:clamp(42px,6.4vw,78px);font-weight:600;line-height:1.0;letter-spacing:-.045em;margin-top:22px;max-width:16ch}
+  .hero h1 b{color:var(--lime);font-weight:600}
+  .hero p.sub{color:var(--dim);font-size:19px;margin-top:24px;max-width:46ch}
+  .hero .cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+  .hero .meta{margin-top:22px;font-size:13.5px;color:var(--dim-2)}
+
+  /* lookup card */
+  .lookup{border:1px solid rgba(180,255,215,.18);border-radius:18px;background:linear-gradient(180deg,#0c231c,#07150f);padding:24px 26px;box-shadow:0 40px 70px -50px #000}
+  .lookup-h{font-family:var(--m);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8fb3a3}
+  .lookup-c{margin-top:16px;font-family:var(--m);font-size:16px;line-height:1.75;color:#dbe8e0;white-space:pre-wrap}
+  .lookup-sub{margin-top:8px;font-family:var(--m);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#7f948a}
+  .lookup-c .p{color:var(--lime)}
+  .lookup-c .out{color:#eef6f1;font-weight:500}
+
+  section{padding-block:70px;border-top:1px solid var(--line)}
+  .sec-t{font-family:var(--s);font-size:clamp(24px,3.2vw,34px);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+  .sec-d{color:var(--dim);margin-top:10px;font-size:16px;max-width:56ch}
+/* ---------- versions ---------- */
+  .vers{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:32px}
+  .ver{border:1px solid rgba(180,255,215,.2);border-radius:14px;padding:20px 18px;transition:.18s;background:linear-gradient(180deg,#0c241d,#07160f)}
+  .ver:hover{border-color:rgba(185,242,77,.5);transform:translateY(-3px)}
+  .ver .n{font-family:var(--s);font-size:30px;font-weight:600;letter-spacing:-.03em}
+  .ver .t{font-size:12.5px;color:#9db2a7;margin-top:3px}
+  .ver .c{font-family:var(--m);font-size:11.5px;color:var(--mint);margin-top:16px}
+
+  /* ---------- steps strip ---------- */
+
+
+  footer{border-top:1px solid var(--line);padding-block:34px 44px;font-size:13.5px;color:var(--dim-2)}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  .foot .links{display:flex;gap:20px}
+  .foot a:hover{color:var(--lime)}
+
+  /* ---------- mobile ---------- */
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .hero h1{max-width:18ch}
+    .vers{grid-template-columns:repeat(3,1fr)}
+    .bar{flex-wrap:wrap;gap:10px}
+    .bar nav{order:3;width:100%;margin-left:0;display:flex;gap:18px;
+             overflow-x:auto;scrollbar-width:none;padding:2px 0 8px}
+    .bar nav::-webkit-scrollbar{display:none}
+    .bar nav a{font-size:14.5px;white-space:nowrap;padding:10px 0;min-height:40px;display:inline-flex;align-items:center}
+    .logo{min-height:40px}
+    .bar .btn{margin-left:auto}
+  }
+  @media (max-width:620px){
+    body{font-size:16px}
+    .hero{padding-block:40px 28px}
+    .hero h1{font-size:clamp(32px,9.6vw,44px);letter-spacing:-.035em}
+    .hero p.sub{font-size:16.5px;margin-top:18px}
+    .hero .cta{flex-direction:column;gap:8px;margin-top:24px}
+    .hero .cta .btn{width:100%;justify-content:center}
+    .hero .meta{font-size:12.5px}
+    .lookup{padding:18px 18px 20px}
+    .lookup-c{font-size:14px;overflow-x:auto}
+    section{padding-block:44px}
+    .vers{grid-template-columns:repeat(2,1fr);gap:9px}
+    .ver{padding:16px 14px}
+    .ver .n{font-size:26px}
+    .ver .t{font-size:12px}
+    .ver .c{font-size:12px;margin-top:12px}
+    .kicker{font-size:11px;letter-spacing:.1em}
+    .lookup-h{font-size:11.5px}
+    .lookup-sub{font-size:11px;letter-spacing:.05em}
+    .foot{font-size:12.5px}
+    .foot a{display:inline-flex;align-items:center;min-height:40px;padding:6px 0}
+    .foot .links{flex-wrap:wrap;gap:10px 18px}
+    .bar .btn{min-height:42px;padding:10px 14px;font-size:14px}
+  }
+  @media (max-width:370px){
+    .vers{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#"><img src="../../logo.jpg" alt="">Wild Kernels</a>
+    <nav>
+      <a href="#versions">Versions</a>
+      <a href="#">Docs</a>
+      <a href="#">Telegram</a>
+    </nav>
+    <a class="btn" href="#versions">Downloads</a>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <span class="glow"></span>
+  <div class="hero-grid">
+    <div>
+      <p class="kicker">Android 12–16 · <span data-stat="kernel_builds">—</span> builds · <span data-stat="lines">—</span> kernel lines</p>
+      <h1>Kernels that come <b>rooted.</b></h1>
+      <p class="sub">Prebuilt Android kernels with KernelSU inside and SUSFS hiding it. Flash one zip and you're done.</p>
+      <div class="cta">
+        <a class="btn primary" href="#versions">Find your kernel →</a>
+        <a class="btn" href="#">How it works</a>
+      </div>
+      <p class="meta">Latest release <b data-stat="tag">—</b> · <span data-stat="date_text">—</span> · <span data-stat="kernel_builds">—</span> images across <span data-stat="lines">—</span> kernel lines</p>
+      <p class="meta" style="margin-top:8px">Source and checksums on <a href="#" style="color:var(--mint);border-bottom:1px solid rgba(111,224,176,.35)">GitHub</a> · flashing is at your own risk</p>
+    </div>
+
+    <aside class="lookup">
+      <div class="lookup-h">Check your kernel version</div>
+      <pre class="lookup-c"><span class="p">$</span> uname -r
+<span class="out">6.1.157-android14</span></pre>
+      <p class="lookup-sub">example output — run it in Termux or adb</p>
+    </aside>
+  </div>
+</div>
+
+<section id="versions">
+  <div class="wrap">
+    <h2 class="sec-t">Start with your kernel version</h2>
+    <p class="sec-d">Settings → About phone, or <code style="font-family:var(--m);font-size:14px">uname -r</code>. Read the first two numbers — <code style="font-family:var(--m);font-size:14px">6.1</code> in <code style="font-family:var(--m);font-size:14px">6.1.157-android14</code>. That is your line.</p>
+    <div class="vers">
+      <a class="ver" href="#" data-kline="5.10"><div class="n">5.10</div><div class="t">Android 12 · 13</div><div class="c"><span data-line="237">—</span> builds →</div></a>
+      <a class="ver" href="#" data-kline="5.15"><div class="n">5.15</div><div class="t">Android 13 · 14</div><div class="c"><span data-line="183">—</span> builds →</div></a>
+      <a class="ver" href="#" data-kline="6.1"><div class="n">6.1</div><div class="t">Android 14</div><div class="c"><span data-line="96">—</span> builds →</div></a>
+      <a class="ver" href="#" data-kline="6.6"><div class="n">6.6</div><div class="t">Android 15</div><div class="c"><span data-line="60">—</span> builds →</div></a>
+      <a class="ver" href="#" data-kline="6.12"><div class="n">6.12</div><div class="t">Android 16</div><div class="c"><span data-line="24">—</span> builds →</div></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>Wild Kernels · GPL-3.0 · built in public</span>
+    <span class="links"><a href="#">Telegram</a><a href="#">GitHub</a><a href="#">Wiki</a><a href="#">Contact</a></span>
+  </div>
+</footer>
+
+
+
+<script src="../../stats.js"></script>
+<script>
+  (function () {
+    var s = window.WK_STATS;
+    if (!s) return;
+    var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+    var val = function (k) { return k === "kernel_builds" || k === "lines" || k === "assets" ? fmt(s[k]) : s[k]; };
+    document.querySelectorAll("[data-stat]").forEach(function (el) {
+      var v = val(el.dataset.stat);
+      if (v !== undefined) el.textContent = v;
+    });
+    document.querySelectorAll("[data-kline]").forEach(function (tile) {
+      var n = s.line_counts && s.line_counts[tile.dataset.kline];
+      var slot = tile.querySelector("[data-line]");
+      if (n !== undefined && slot) slot.textContent = fmt(n);
+    });
+    // keep the tiles consistent with the headline numbers
+    var total = 0;
+    Object.keys(s.line_counts || {}).forEach(function (k) { total += s.line_counts[k]; });
+    if (total && total !== s.kernel_builds) {
+      document.documentElement.dataset.countMismatch = total + "/" + s.kernel_builds;
+    }
+  })();
+</script>
+</body>
+</html>

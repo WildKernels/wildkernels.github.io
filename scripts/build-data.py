@@ -7,11 +7,13 @@ import json, re, subprocess, datetime, os, pathlib
 
 OUT = str(pathlib.Path(__file__).resolve().parent.parent / "data.js")
 
-RELEASES = [
-    ("gki", "WildKernels/GKI_KernelSU_SUSFS", "r22"),
-    ("oneplus", "WildKernels/OnePlus_KernelSU_SUSFS", "v2.4.0-r1"),
-    ("samsung", "WildKernels/Samsung_KernelSU_SUSFS", "2.3.0-r6"),
-    ("sultan", "WildKernels/Sultan_KernelSU_SUSFS", "v2.0.0-r12"),
+# repo -> key. The tag is always whatever GitHub reports as the latest release,
+# so a new release is picked up by simply re-running this script.
+REPOS = [
+    ("gki", "WildKernels/GKI_KernelSU_SUSFS"),
+    ("oneplus", "WildKernels/OnePlus_KernelSU_SUSFS"),
+    ("samsung", "WildKernels/Samsung_KernelSU_SUSFS"),
+    ("sultan", "WildKernels/Sultan_KernelSU_SUSFS"),
 ]
 
 def gh(path):
@@ -59,8 +61,9 @@ def classify(repo, name):
 
 data = {"generated": datetime.date.today().isoformat(), "repos": {}}
 
-for key, repo, tag in RELEASES:
-    rel = gh(f"repos/{repo}/releases/tags/{tag}")
+for key, repo in REPOS:
+    rel = gh(f"repos/{repo}/releases/latest")
+    tag = rel["tag_name"]
     meta = gh(f"repos/{repo}")
     assets = []
     for a in rel["assets"]:
@@ -111,6 +114,39 @@ data["stats"] = dict(
     total_downloads=total_dl, stars_tracked=stars,
     matrix=matrix,
 )
+
+# ---- tiny stats file for page headers (a few hundred bytes) ----
+import datetime as _dt
+_pub = data["repos"]["gki"]["published"]
+_d = _dt.date.fromisoformat(_pub)
+per_line = {k: sum(len(v) for v in av.values()) for k, av in matrix.items()}
+line_targets = {k: sorted(av.keys(), key=lambda a: int(a.replace("android", ""))) for k, av in matrix.items()}
+line_newest = {}
+for k, av in matrix.items():
+    vers = [v for lst in av.values() for v in lst]
+    line_newest[k] = max(vers, key=lambda v: tuple(map(int, v.split("-")[0].split("."))))
+line_order = sorted(matrix.keys(), key=lambda v: tuple(map(int, v.split("."))))
+stats = {
+    "tag": data["repos"]["gki"]["tag"],
+    "published": _pub,
+    "date_text": f"{_d.day} {_d.strftime('%B %Y')}",
+    "kernel_builds": len(kernels),
+    "lines": len(lines),
+    "assets": len(gki),
+    "roots": len(roots),
+    "line_counts": dict(sorted(per_line.items(), key=lambda kv: tuple(map(int, kv[0].split("."))))),
+    "line_targets": dict(sorted(line_targets.items(), key=lambda kv: tuple(map(int, kv[0].split("."))))),
+    "line_newest": dict(sorted(line_newest.items(), key=lambda kv: tuple(map(int, kv[0].split("."))))),
+    "line_order": line_order,
+    "android_range": (f"{min(int(a.replace('android', '')) for a in andrs)}–"
+                      f"{max(int(a.replace('android', '')) for a in andrs)}"),
+    "generated": data["generated"],
+}
+STATS = pathlib.Path(OUT).parent / "stats.js"
+STATS.write_text(
+    "/* Generated " + data["generated"] + " from live GitHub release data. */\n"
+    "window.WK_STATS = " + json.dumps(stats, separators=(",", ":")) + ";\n")
+print("wrote", STATS, STATS.stat().st_size, "bytes")
 
 with open(OUT, "w") as f:
     f.write("/* Generated " + data["generated"] + " from live GitHub release data. */\n")

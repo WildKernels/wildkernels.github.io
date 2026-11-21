@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wild Kernels — design directions</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0b0c0b;color:#eee9dd;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:48px 24px;line-height:1.55}
+  .w{max-width:1000px;margin:0 auto}
+  h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;margin-bottom:8px}
+  p.sub{color:#8e948a;margin-bottom:32px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  a.card{display:block;border:1px solid #262a24;border-radius:10px;padding:22px;color:inherit;text-decoration:none;transition:.15s;background:#101210}
+  a.card:hover{transform:translateY(-3px);border-color:#fec718}
+  .lt{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#fec718}
+  h2{font-size:19px;margin:10px 0 6px}
+  p{font-size:13.5px;color:#a2a89a}
+  .sw{display:flex;gap:5px;margin-top:16px}
+  .sw i{width:18px;height:18px;border-radius:4px;display:block}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="w">
+  <h1>Three directions</h1>
+  <p class="sub">Same content, same real data. Pick one and I build the full site (builds, docs, projects) in that language.</p>
+  <div class="grid">
+    <a class="card" href="a-editorial/">
+      <div class="lt">A</div>
+      <h2>Editorial paper</h2>
+      <p>Warm white, serif headlines, hairline rules, rust accent. Reads like a technical journal — credible, calm, nothing shouting.</p>
+      <div class="sw"><i style="background:#f8f6f1"></i><i style="background:#b4451f"></i><i style="background:#15150f"></i></div>
+    </a>
+    <a class="card" href="b-terminal/">
+      <div class="lt">B</div>
+      <h2>Build terminal</h2>
+      <p>Black, monospace, dense tables, status colours. Looks like the CI that produced the kernel — for the people who read logs.</p>
+      <div class="sw"><i style="background:#07090a"></i><i style="background:#3ddc84"></i><i style="background:#f0b429"></i></div>
+    </a>
+    <a class="card" href="e-showcase/">
+      <div class="lt">E</div>
+      <h2>Showcase</h2>
+      <p>Image-led and much shorter: one promise, a phone showing the manager after flashing, a build heatmap instead of a table, and five version tiles. No spec sheets.</p>
+      <div class="sw"><i style="background:#04100d"></i><i style="background:#b9f24d"></i><i style="background:#0a1d18"></i></div>
+    </a>
+    <a class="card" href="d-simple/">
+      <div class="lt">D</div>
+      <h2>Newcomer-first</h2>
+      <p>C's palette, cut in half. One promise, three steps, an honest "is this for me", then one picker. Everything technical folded away until asked for.</p>
+      <div class="sw"><i style="background:#05110e"></i><i style="background:#b9f24d"></i><i style="background:#0a1c17"></i></div>
+    </a>
+    <a class="card" href="c-product/">
+      <div class="lt">C</div>
+      <h2>Product page</h2>
+      <p>Deep green, lime accent, rounded cards, interactive build picker. The most promotable — built to be linked in a chat and screenshotted.</p>
+      <div class="sw"><i style="background:#04100d"></i><i style="background:#b9f24d"></i><i style="background:#6fe0b0"></i></div>
+    </a>
+  </div>
+</div>
+</body>
+</html>
