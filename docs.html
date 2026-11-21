@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs — Wild Kernels</title>
+<meta name="description" content="How to install a Wild Kernels build: Kernel Flasher or magiskboot, post-install checks, every feature in the image, and every Build Kernels option.">
+<meta name="theme-color" content="#04100d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/showcase.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="index.html"><img src="logo.jpg" alt="">Wild Kernels</a>
+    <nav>
+      <a href="builds.html">Builds</a>
+      <a href="docs.html" aria-current="page">Docs</a>
+      <a href="projects.html">Projects</a>
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+    </nav>
+    <a class="btn primary sm" href="builds.html">Downloads</a>
+  </div>
+</header>
+
+<div class="wrap page-head">
+  <p class="kicker">Documentation</p>
+  <h1>Read this before you flash.</h1>
+  <p>The same guides that live in the wiki, in one place: how to pick the right image, how to flash it with or without a PC, what to check afterwards, and what every build option does.</p>
+</div>
+
+<div class="wrap docs-layout">
+  <nav class="toc" aria-label="Contents">
+<h4>On this page</h4><ol>
+<li><a href="#before">Before anything</a></li>
+<li><a href="#install">Installation</a></li>
+<ol>
+<li><a class="sub" href="#install-choose-your-method">Choose your method</a></li>
+<li><a class="sub" href="#install-prerequisites">Prerequisites</a></li>
+<li><a class="sub" href="#install-after-flashing">After flashing</a></li>
+<li><a class="sub" href="#install-other-methods">Other methods</a></li>
+</ol>
+<li><a href="#kernelflasher">Kernel Flasher</a></li>
+<ol>
+<li><a class="sub" href="#kernelflasher-prerequisites">Prerequisites</a></li>
+<li><a class="sub" href="#kernelflasher-steps">Steps</a></li>
+<li><a class="sub" href="#kernelflasher-supported-flashing-apps">Supported flashing apps</a></li>
+<li><a class="sub" href="#kernelflasher-after-flashing">After flashing</a></li>
+</ol>
+<li><a href="#magiskboot">magiskboot</a></li>
+<ol>
+<li><a class="sub" href="#magiskboot-preparation">Preparation</a></li>
+</ol>
+<li><a href="#postinstall">Post-install</a></li>
+<ol>
+<li><a class="sub" href="#postinstall-1-download-matching-manager-kernelsu-kernelsu-next-resukisu">1. Download matching manager — KernelSU / KernelSU-Next / ReSukiSU</a></li>
+<li><a class="sub" href="#postinstall-2-susfs">2. SUSFS</a></li>
+<li><a class="sub" href="#postinstall-3-meta-module-if-mounting-modules">3. Meta Module (if mounting modules)</a></li>
+<li><a class="sub" href="#postinstall-4-droidspaces">4. DroidSpaces</a></li>
+<li><a class="sub" href="#postinstall-5-troubleshooting">5. Troubleshooting</a></li>
+</ol>
+<li><a href="#features">Features</a></li>
+<ol>
+<li><a class="sub" href="#features-root-implementations">Root Implementations</a></li>
+<li><a class="sub" href="#features-root-hiding">Root Hiding</a></li>
+<li><a class="sub" href="#features-meta-module">Meta Module</a></li>
+<li><a class="sub" href="#features-security">Security</a></li>
+<li><a class="sub" href="#features-networking">Networking</a></li>
+<li><a class="sub" href="#features-debugging-tracing-amp-bpf">Debugging, Tracing &amp; BPF</a></li>
+<li><a class="sub" href="#features-performance">Performance</a></li>
+<li><a class="sub" href="#features-container-runtime">Container Runtime</a></li>
+</ol>
+<li><a href="#configure">Configure a build</a></li>
+<ol>
+<li><a class="sub" href="#configure-scope">Scope</a></li>
+<li><a class="sub" href="#configure-sources">Sources</a></li>
+<li><a class="sub" href="#configure-root">Root</a></li>
+<li><a class="sub" href="#configure-protections-amp-subsystems">Protections &amp; subsystems</a></li>
+<li><a class="sub" href="#configure-build-behavior">Build behavior</a></li>
+</ol>
+</ol>
+        </nav>
+  <div class="doc-body">
+    <section id="before">
+      <h2>Before anything</h2>
+      <p class="dek">00 / the one paragraph everybody skips</p>
+      <div class="callout">
+        <p><strong>Flashing a kernel can brick your device.</strong> Back up your data and keep an untouched <code>boot.img</code> you can fastboot back. Everything here is provided as-is — Wild Kernels is not responsible for damage, data loss or voided warranties.</p>
+      </div>
+      <p>Two things decide whether a build boots: the <strong>kernel version</strong> your phone currently runs, and the <strong>root flavour</strong> your manager speaks. Get either wrong and the phone bootloops or the manager reports a version mismatch. Both are covered below.</p>
+    </section>
+<section id="install">
+<h2>Installation</h2>
+<p class="dek">01 / Two paths: you already have root, or you patch boot.img yourself.</p>
+<div class="callout"><p><strong>Caution.</strong> Wild Kernels is not responsible for bricked devices or damage. By flashing, you assume all risk. Back up your data and understand the risks before flashing.</p></div>
+<h3 id="install-choose-your-method">Choose your method</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>When to use</th>
+<th>Requires root</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kernel Flasher</strong></td>
+<td>Upgrading with root already available, no PC needed</td>
+<td>Yes</td>
+<td><a href="#kernelflasher">kernelflasher.md</a></td>
+</tr>
+<tr>
+<td><strong>magiskboot</strong></td>
+<td>When you want to flash a pre-patched <code>boot.img</code> directly (no pre-rooted setup required)</td>
+<td>No</td>
+<td><a href="#magiskboot">magiskboot.md</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="install-prerequisites">Prerequisites</h3>
+<ul class="chk">
+<li> GKI 2.0 device with an unlocked bootloader</li>
+<li>Full backup (at minimal the <code>boot</code> partition or have a stock unmodified <code>boot.img</code>)</li>
+<li>Correct AnyKernel3 ZIP for your kernel version from <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Releases</a></li>
+</ul>
+<h3 id="supported-versions">Supported versions</h3>
+<p>Only GKI 2.0 is supported — check marks show builds provided by this project:</p>
+<table>
+<thead>
+<tr>
+<th>Pre-GKI</th>
+<th>GKI 1.0</th>
+<th>GKI 2.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.10.x</td>
+<td>5.4.x</td>
+<td>5.10.x-android12 ✓</td>
+</tr>
+<tr>
+<td>3.18.x</td>
+<td></td>
+<td>5.10.x-android13 ✓</td>
+</tr>
+<tr>
+<td>4.4.x</td>
+<td></td>
+<td>5.15.x-android13 ✓</td>
+</tr>
+<tr>
+<td>4.9.x</td>
+<td></td>
+<td>5.15.x-android14 ✓</td>
+</tr>
+<tr>
+<td>4.14.x</td>
+<td></td>
+<td>6.1.x-android14 ✓</td>
+</tr>
+<tr>
+<td>4.19.x</td>
+<td></td>
+<td>6.6.x-android15 ✓</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>6.12.x-android16 ✓</td>
+</tr>
+</tbody>
+</table>
+<p>For Pre-GKI or GKI 1.0 kernels, contact <a href="https://t.me/TheWildJames">@TheWildJames</a> to discuss possiblities.</p>
+<div class="callout note"><p><strong>Important.</strong> Match by the full kernel version (e.g., <code>6.1.x-androidXX</code>) — your device's Android version and the <code>androidXX</code> in the kernel version are not necessarily the same. For example, as of writing, a Google Pixel 8 is on <code>6.1.157-android14</code> while the system Android is 17.</p></div>
+<h3 id="install-after-flashing">After flashing</h3>
+<p>See <a href="#postinstall">Post-Install — Verify &amp; Finish Setup</a> for manager install, SUSFS module, and verification steps.</p>
+<hr />
+<h3 id="install-other-methods">Other methods</h3>
+<details><summary>Alternative flashing tools</summary>
+<ul>
+<li><a href="https://github.com/badabing2005/PixelFlasher">PixelFlasher</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.franco.kernel&amp;hl=en_CA&amp;pli=1">Franco Kernel Manager</a></li>
+</ul>
+</details>
+<hr />
+<div class="callout note"><p><strong>Note.</strong> Portions of this documentation are adapted from the official <a href="https://kernelsu.org/">KernelSU documentation</a>.</p></div>
+<p>See also: <a href="#features">Kernel Features Documentation</a></p>
+</section>
+
+<section id="kernelflasher">
+<h2>Kernel Flasher</h2>
+<p class="dek">02 / Upgrade from the phone. No PC, no fastboot.</p>
+<div class="callout note"><p><strong>Note.</strong> This method is more convenient when upgrading KernelSU and can be done without a computer.</p></div>
+<p>See <a href="#install">Installation</a> for prerequisites, supported versions, and risks.</p>
+<h3 id="kernelflasher-prerequisites">Prerequisites</h3>
+<ul>
+<li>Root access already granted to the flashing app (for first install from stock without root, use recovery/fastboot — see <a href="#magiskboot">magiskboot</a>)</li>
+<li>AnyKernel3 ZIP matching your kernel version from <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Releases</a></li>
+</ul>
+<h3 id="kernelflasher-steps">Steps</h3>
+<ol>
+<li><strong>Download the AnyKernel3 ZIP</strong> from the latest <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Releases</a> page.</li>
+<li><strong>Open the Kernel Flasher app</strong>, grant root permissions when prompted.</li>
+<li><strong>Select the AnyKernel3 ZIP</strong> and flash. Do not interrupt.</li>
+<li><strong>Reboot</strong> when prompted and verify the manager shows the expected version.</li>
+</ol>
+<h3 id="kernelflasher-supported-flashing-apps">Supported flashing apps</h3>
+<table>
+<thead>
+<tr>
+<th>App</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/fatalcoder524/KernelFlasher">Kernel Flasher</a></td>
+<td>Recommended, actively maintained</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kernelflasher-after-flashing">After flashing</h3>
+<p>See <a href="#postinstall">Post-Install — Verify &amp; Finish Setup</a>.</p>
+</section>
+
+<section id="magiskboot">
+<h2>magiskboot</h2>
+<p class="dek">03 / Repack a stock boot.img with a pre-patched kernel.</p>
+<p>Use the <a href="https://github.com/topjohnwu/Magisk/releases">official magiskboot build</a> — works on Android and Linux.</p>
+<p>See <a href="#install">Installation</a> for prerequisites, supported versions, and risks.</p>
+<p><strong>Platforms:</strong> <a href="#-android">Android</a> · <a href="#-linux">Linux</a></p>
+<h3 id="magiskboot-preparation">Preparation</h3>
+<ol>
+<li>Get your device's stock <code>boot.img</code>.</li>
+<li>Download the AnyKernel3 ZIP for your kernel version from <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Releases</a>.</li>
+<li>Unpack the ZIP and get the <code>Image</code> file (the KernelSU kernel).</li>
+</ol>
+<hr />
+<details><summary><b> Android</b> — via adb + <code>libmagiskboot.so</code></summary>
+<p>Folder structure on device (<code>/data/local/tmp/</code>):</p>
+<pre><code>/data/local/tmp/
+├── magiskboot
+├── boot.img
+└── Image
+</code></pre>
+<ol>
+<li>Download latest Magisk from <a href="https://github.com/topjohnwu/Magisk/releases">GitHub Releases</a>.</li>
+<li>Rename <code>Magisk-*(version).apk</code> to <code>Magisk-*.zip</code> and unzip.</li>
+<li>Push <code>libmagiskboot.so</code> to device:
+  <code>sh
+  adb push Magisk-*/lib/arm64-v8a/libmagiskboot.so /data/local/tmp/magiskboot</code></li>
+<li>Push <code>boot.img</code> and <code>Image</code>:
+  <code>sh
+  adb push boot.img /data/local/tmp/
+  adb push Image /data/local/tmp/</code></li>
+<li>Make executable:
+  <code>sh
+  adb shell
+  cd /data/local/tmp/
+  chmod +x magiskboot</code></li>
+<li>Unpack:
+  <code>sh
+  ./magiskboot unpack boot.img</code></li>
+<li>Replace kernel:
+  <code>sh
+  mv -f Image kernel</code></li>
+<li>Repack:
+  <code>sh
+  ./magiskboot repack boot.img</code></li>
+<li>Test: <code>fastboot boot new-boot.img</code></li>
+<li>Flash: <code>fastboot flash boot new-boot.img</code></li>
+</ol>
+</details>
+<details><summary><b> Linux</b> — official magiskboot</summary>
+<p>Folder structure on PC:</p>
+<pre><code>.
+├── magiskboot
+├── boot.img
+└── Image
+</code></pre>
+<ol>
+<li>Prepare <code>boot.img</code> and <code>Image</code> on PC.</li>
+<li>Make executable: <code>chmod +x magiskboot</code></li>
+<li>Unpack: <code>./magiskboot unpack boot.img</code></li>
+<li>Replace: <code>mv -f Image kernel</code></li>
+<li>Repack: <code>./magiskboot repack boot.img</code></li>
+<li>Test: <code>fastboot boot new-boot.img</code></li>
+<li>Flash: <code>fastboot flash boot new-boot.img</code></li>
+</ol>
+</details>
+</section>
+
+<section id="postinstall">
+<h2>Post-install</h2>
+<p class="dek">04 / Matching manager, SUSFS module, metamodules, verification.</p>
+<p>After flashing a Wild Kernels GKI kernel, do these checks in order.</p>
+<h3 id="postinstall-1-download-matching-manager-kernelsu-kernelsu-next-resukisu">1. Download matching manager — KernelSU / KernelSU-Next / ReSukiSU</h3>
+<ul class="chk">
+<li> Download the <code>manager-apk-*</code> from the same <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Releases</a> page you got the kernel from.</li>
+<li>Install / update it over any existing manager.</li>
+<li>Open the manager — it should show the kernel version you just flashed (e.g. <code>6.1.x-androidXX-Wild</code>) and report "Working".</li>
+</ul>
+<h3 id="postinstall-2-susfs">2. SUSFS</h3>
+<ul class="chk">
+<li> In the manager, install the <a href="https://github.com/sidex15/susfs4ksu-module">sidex15/susfs4ksu-module</a>.</li>
+<li>Reboot.</li>
+</ul>
+<h3 id="postinstall-3-meta-module-if-mounting-modules">3. Meta Module (if mounting modules)</h3>
+<p>If you need to mount modules, install one:</p>
+<ul class="chk">
+<li> <a href="https://github.com/maxsteeel/nomount">NoMount</a> (Recommended) — <code>NoMount-metamodule-*commit*.zip</code> from <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Releases</a></li>
+<li><a href="https://github.com/backslashxx/mountify">Mountify</a> — latest compatible module</li>
+</ul>
+<div class="callout note"><p><strong>Note.</strong> Only one is required. Compatibility with SUSFS shifts with updates.</p></div>
+<h3 id="postinstall-4-droidspaces">4. DroidSpaces</h3>
+<ul class="chk">
+<li> Download the app: <a href="https://github.com/ravindu644/Droidspaces-OSS">ravindu644/Droidspaces-OSS</a></li>
+</ul>
+<h3 id="postinstall-5-troubleshooting">5. Troubleshooting</h3>
+<details><summary><b> Common issues</b></summary>
+<ul>
+<li><strong>General issues</strong> — try restarting your device.</li>
+<li><strong>Bootloop</strong> — restore a stock boot.img via fastboot/recovery.</li>
+<li><strong>Manager and kernel version do not match (e.g. 31000 != 32000)</strong> — install the latest kernel and manager from the release and reboot.</li>
+<li><strong>Root not working</strong> — ensure the manager matches the flashed flavor (KernelSU / KernelSU-Next / ReSukiSU).</li>
+</ul>
+</details>
+<details><summary><b> Nuclear option</b></summary>
+<p>Uninstall all modules and reboot, then delete all files and folders in <code>/data/adb</code>. Reboot again.</p>
+<div class="callout"><p><strong>Caution.</strong> This wipes all KernelSU/Magisk module data — only use if nothing else works.</p></div>
+</details>
+</section>
+
+<section id="features">
+<h2>Features</h2>
+<p class="dek">05 / What is actually compiled into a Wild kernel.</p>
+<p>Per-feature documentation for the GKI2 kernels built from this repository.</p>
+<hr />
+<h3 id="features-root-implementations">Root Implementations</h3>
+<p>Kernel-based su and root access management for Android.</p>
+<table>
+<thead>
+<tr>
+<th>Root Flavor</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KernelSU</td>
+<td>Original implementation by <a href="https://github.com/tiann">tiann</a> — the foundation from which all other variants are derived.</td>
+<td><a href="https://github.com/tiann/KernelSU">tiann/KernelSU</a></td>
+</tr>
+<tr>
+<td>KernelSU-Next</td>
+<td>Created by <a href="https://github.com/rifsxd">rifsxd</a>. SUSFS-integrated builds sourced from pershoot.</td>
+<td><a href="https://github.com/KernelSU-Next/KernelSU-Next">KernelSU-Next/KernelSU-Next</a> · <a href="https://github.com/pershoot/KernelSU-Next">pershoot/KernelSU-Next</a></td>
+</tr>
+<tr>
+<td>ReSukiSU</td>
+<td>Fork of SukiSU, also has its own SUSFS-integrated branch.</td>
+<td><a href="https://github.com/ReSukiSU/ReSukiSU">ReSukiSU/ReSukiSU</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="features-root-hiding">Root Hiding</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>susfs4ksu</td>
+<td>Root-hiding add-on for KernelSU using kernel patches and a userspace module. Recommended module: <a href="https://github.com/sidex15/susfs4ksu-module">sidex15/susfs4ksu-module</a>.</td>
+<td><a href="https://gitlab.com/simonpunk/susfs4ksu">simonpunk/susfs4ksu</a></td>
+</tr>
+<tr>
+<td>Ptrace Leak Fix</td>
+<td>Fixes ptrace info leak on kernels older than 5.16. Internal to root hiding.</td>
+<td><a href="https://github.com/WildKernels/kernel_patches/blob/main/gki_ptrace.patch">patch</a></td>
+</tr>
+<tr>
+<td>Unicode Fix</td>
+<td>Prevents path traversal via non-printable Unicode (experimental). Internal to root hiding.</td>
+<td><a href="https://github.com/WildKernels/kernel_patches/blob/main/common/unicode_bypass_fix_6.1-.patch">patch 6.1-</a> · <a href="https://github.com/WildKernels/kernel_patches/blob/main/common/unicode_bypass_fix_6.1+.patch">patch 6.1+</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="features-meta-module">Meta Module</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NoMount</td>
+<td>Metamodule providing mount-related functionality alongside root implementations.</td>
+<td><a href="https://github.com/maxsteeel/nomount">maxsteeel/nomount</a></td>
+</tr>
+<tr>
+<td>Mountify</td>
+<td>Globally mounted modules via OverlayFS.</td>
+<td><a href="https://github.com/backslashxx/mountify">backslashxx/mountify</a></td>
+</tr>
+</tbody>
+</table>
+<div class="callout note"><p><strong>Note.</strong> Only one is required if mounting modules.</p></div>
+<details><summary>Which one should I use?</summary>
+<ul>
+<li><strong>NoMount</strong> — recommended, bundled as <code>nomount-metamodule</code> in CI.</li>
+<li><strong>Mountify</strong> — alternative OverlayFS approach, not bundled — install latest compatible module manually.</li>
+</ul>
+</details>
+<hr />
+<h3 id="features-security">Security</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseband Guard</td>
+<td>Lightweight LSM blocking unauthorized writes to critical partitions and device nodes.</td>
+<td><a href="https://github.com/vc-teahouse/Baseband-guard">vc-teahouse/Baseband-guard</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="features-networking">Networking</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP Congestion Control</td>
+<td>BBRv1, BBRv3, CUBIC, BIC, Westwood, HTCP</td>
+<td><code>CONFIG_TCP_CONG_BBR</code> / <code>CONFIG_TCP_CONG_CUBIC</code> etc</td>
+</tr>
+<tr>
+<td>WireGuard</td>
+<td>Built-in VPN support</td>
+<td><code>CONFIG_WIREGUARD</code></td>
+</tr>
+<tr>
+<td>IP Set / IPv6 NAT</td>
+<td>Advanced firewall capabilities</td>
+<td><code>CONFIG_IP_SET</code> / <code>CONFIG_IP6_NF_NAT</code></td>
+</tr>
+<tr>
+<td>Conntrack / connmark</td>
+<td>Connection marking for packet classification</td>
+<td><code>CONFIG_NF_CONNTRACK</code> / <code>CONFIG_NET_ACT_CONNMARK</code></td>
+</tr>
+<tr>
+<td>CIFS</td>
+<td>SMB/CIFS network filesystem</td>
+<td><code>CONFIG_CIFS</code></td>
+</tr>
+<tr>
+<td>TTL Target</td>
+<td>Network packet manipulation</td>
+<td><code>CONFIG_IP_NF_TARGET_TTL</code> / <code>CONFIG_IP6_NF_TARGET_HL</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="features-debugging-tracing-amp-bpf">Debugging, Tracing &amp; BPF</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BTF / eBPF / FUSE-BPF</td>
+<td>BPF Type Format, extended BPF, FUSE-BPF interaction</td>
+<td><code>CONFIG_DEBUG_INFO_BTF</code> / <code>CONFIG_BPF_SYSCALL</code> / <code>CONFIG_FUSE_BPF</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="features-performance">Performance</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NTSync</td>
+<td>High-performance synchronization primitives compatible with Windows NT kernel API.</td>
+<td><a href="https://github.com/WildKernels/kernel_patches/tree/main/common/ntsync">WildKernels/kernel_patches</a></td>
+</tr>
+<tr>
+<td>Performance Tuning</td>
+<td>Kernel configuration and tuning options</td>
+<td><a href="https://github.com/WildKernels/kernel_patches/tree/main/common">WildKernels/kernel_patches</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="features-container-runtime">Container Runtime</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DroidSpaces-OSS</td>
+<td>LXC-inspired container runtime for Android/Linux</td>
+<td><a href="https://github.com/ravindu644/Droidspaces-OSS">ravindu644/Droidspaces-OSS</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="callout note"><p><strong>Tip.</strong> strong>Installation</strong> — see <a href="#install">Installation Guide</a>.</p></div>
+</section>
+
+<section id="configure">
+<h2>Configure a build</h2>
+<p class="dek">06 / Every Build Kernels input and what it changes.</p>
+<p>Manual builds run from the <strong>Build Kernels</strong> workflow
+(<a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/actions/workflows/main.yml">Actions → Build Kernels → Run workflow</a>).
+All options below are the dispatch inputs with their defaults.</p>
+<h3 id="configure-scope">Scope</h3>
+<ul>
+<li><strong>Release Type</strong> (<code>Action</code> / <code>Pre-Release</code> / <code>Release</code>, default <code>Action</code>)
+  <code>Action</code> builds and uploads artifacts to the run only — nothing is published.
+  <code>Pre-Release</code> / <code>Release</code> publish a GitHub release under the next <code>rN</code> tag
+  (<code>Pre-Release</code> is flagged as a prerelease).</li>
+<li><strong>Kernel Version</strong> (default <code>All</code>) — limits the build to one kernel line
+  (e.g. <code>6.1.x-android14</code>). <code>All</code> builds every line.</li>
+<li><strong>Patch date (YYYY-MM), kernel sublevel, lts, or All</strong> (default <code>All</code>) —
+  narrows within the selected kernel line, e.g. <code>2025-07</code> builds just that
+  month, <code>141</code> just that sublevel, <code>lts</code> just the LTS tip.</li>
+<li><strong>Render release notes preview only</strong> (default off) — renders the notes and
+  stops. Skips all builds and any release. Use it to check notes before a
+  real run.</li>
+<li><strong>Kernel Branding</strong> (default <code>Wild</code>) — name stamped into the build.</li>
+</ul>
+<h3 id="configure-sources">Sources</h3>
+<ul>
+<li><strong>Commit mode</strong> (<code>latest</code> / <code>verified</code> / <code>update</code>, default <code>verified</code>)</li>
+<li><code>latest</code> resolves every component to its branch tip at run time.</li>
+<li><code>verified</code> uses the audited pins in <code>main.yml</code> for NoMount, the
+    KernelSU / ReSukiSU / SukiSU-Ultra roots, and SUSFS
+    (KernelSU-Next, KowSU, kernel_patches, AnyKernel3, and DroidSpaces
+    always track latest).</li>
+<li><code>update</code> builds at latest, then promotes the verified pins to what
+    just built successfully.</li>
+</ul>
+<h3 id="configure-root">Root</h3>
+<ul>
+<li><strong>Root Flavor</strong> (default <code>All</code>) — <code>All</code> builds KernelSU-Next, KernelSU,
+  and ReSukiSU. SukiSU-Ultra, KowSU, and No Root are opt-in only.
+  KowSU cannot be combined with SUSFS — run it with SUSFS off.</li>
+<li><strong>SUSFS</strong> (default on) — kernel-level root hiding.</li>
+<li><strong>NoMount</strong> (default on) — VFS hooks.</li>
+<li><strong>DroidSpaces</strong> (default on) — chroot/distro support.</li>
+</ul>
+<h3 id="configure-protections-amp-subsystems">Protections &amp; subsystems</h3>
+<ul>
+<li><strong>Baseband Guard</strong> (default on) — baseband protections.</li>
+<li><strong>Networking</strong> (default on) — networking stack additions.</li>
+<li><strong>NTSync</strong> (default on) — NT synchronization primitives.</li>
+<li><strong>Ptrace Patch</strong> (default on) — ptrace hardening adjustments.</li>
+<li><strong>Unicode Fix</strong> (default on) — version-specific unicode fixes.</li>
+<li><strong>BPF Stack</strong> (default on) — BTF + eBPF + FUSE-BPF.</li>
+<li><strong>Performance</strong> (default off) — extra performance patches. Off by default;
+  enable only if you want them.</li>
+</ul>
+<h3 id="configure-build-behavior">Build behavior</h3>
+<ul>
+<li><strong>Use ccache/bazel cache (restore/save)</strong> (default on) — reuses compiler
+  caches across runs. Turn off for a fully clean build.</li>
+<li><strong>Force-load modules with mismatched symbol versions</strong> (default off) —
+  patches the module loader's <code>bad_version</code> path to accept instead of
+  reject, so version-mismatched modules load. Only needed for kernels
+  that would otherwise refuse the build.</li>
+</ul>
+</section>
+
+    <section id="more">
+      <h2>Elsewhere</h2>
+      <p class="dek">07 / source, builds, support</p>
+      <ul>
+        <li><a href="builds.html">Build browser</a> — every image, filterable.</li>
+        <li><a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">GitHub releases</a> — the canonical download page.</li>
+        <li><a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/wiki">Upstream wiki</a> — same guides, GitHub-rendered.</li>
+        <li><a href="https://t.me/WildKernels">Telegram group</a> — support, in public.</li>
+      </ul>
+      <p style="color:var(--dim-2);font-size:13px;margin-top:18px">Portions of this documentation are adapted from the official KernelSU documentation.</p>
+    </section>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>Wild Kernels · GPL-3.0 · built in public</span>
+    <span class="links">
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
+      <a href="builds.html">Builds</a>
+      <a href="projects.html">Projects</a>
+    </span>
+  </div>
+</footer>
+
+<script src="stats.js"></script>
+<script src="assets/showcase.js"></script>
+</body>
+</html>

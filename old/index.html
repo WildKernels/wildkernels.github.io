@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wild Kernels — prebuilt GKI kernels with KernelSU &amp; SUSFS</title>
+<meta name="description" content="Prebuilt Android GKI kernels with KernelSU, KernelSU-Next or BakaSU and SUSFS root hiding patched in. Five kernel lines, every sublevel, ready-to-flash AnyKernel3 zips.">
+<meta name="theme-color" content="#0c0e0c">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wild Kernels — prebuilt Android kernels, root hiding included">
+<meta property="og:description" content="GKI 2.0 kernels from 5.10 to 6.12 with KernelSU + SUSFS already patched. 600 images in the latest release.">
+<meta property="og:image" content="https://wildkernels.dev/assets/og.png">
+<meta property="og:url" content="https://wildkernels.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=2">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html" aria-label="Wild Kernels home">
+      <img src="logo.jpg" alt="" width="34" height="34">
+      <span><b>Wild Kernels</b><span>wildkernels.dev</span></span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="builds.html">Builds</a>
+      <a href="docs.html">Docs</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Community</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-sm" href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-sm btn-wire" href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="sheet"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="sheet" id="sheet">
+  <a href="builds.html">Builds <small>629 files</small></a>
+  <a href="docs.html">Docs <small>install</small></a>
+  <a href="projects.html">Projects <small>19 repos</small></a>
+  <a href="contact.html">Community <small>telegram</small></a>
+  <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub <small>source</small></a>
+</div>
+
+<main id="main">
+
+  <!-- ============ hero ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker"><span class="num">01</span> GKI 2.0 · Android 12 → 16</p>
+        <h1 class="h1">Android kernels.<br>Root hiding<br><em>built in.</em></h1>
+        <p class="lead">Google's GKI sources compiled with your choice of KernelSU, KernelSU-Next or BakaSU, plus susfs4ksu. Five kernel lines, every sublevel from 2022 to the current LTS, shipped as ready-to-flash AnyKernel3 zips with the matching manager APK beside them.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="builds.html">Browse builds <span aria-hidden="true">→</span></a>
+          <a class="btn" href="docs.html">Install guide</a>
+        </div>
+        <p class="hero-note">
+          <span>release <b>r22</b> · 29 Oct 2026</span>
+          <span><b>600</b> kernel images</span>
+          <span><b>3</b> root flavors</span>
+          <span><b>GPL-3.0</b></span>
+        </p>
+      </div>
+
+      <aside class="ledger" aria-label="Latest build matrix">
+        <div class="ledger-head"><b>Latest matrix</b><span class="mono">r22 · 29.10.26</span></div>
+        <div id="ledger-rows">
+          <div class="ledger-row"><span class="line">5.10</span><span class="ver">loading…</span><span class="n"></span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ features ============ -->
+  <section class="band band-paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="kicker"><span class="num">02</span> Inside the build</p>
+          <h2 class="h2" style="margin-top:14px">Everything below is compiled in.<br>No modules to chase.</h2>
+        </div>
+        <p class="muted" style="max-width:36ch;font-size:14.5px">Each run is a full GKI build from Android common — features are patched at source level, not bolted on after boot.</p>
+      </div>
+      <div class="feats reveal">
+        <article class="feat">
+          <span class="idx">01 / ROOT</span>
+          <h3>Your pick of root</h3>
+          <p>KernelSU, KernelSU-Next or BakaSU. FinaSU, SukiSU-Ultra and KowSU on request.</p>
+          <span class="cfg">CONFIG_KSU</span>
+        </article>
+        <article class="feat">
+          <span class="idx">02 / HIDING</span>
+          <h3>SUSFS, patched in</h3>
+          <p>Kernel-side root hiding with the ptrace leak fix and the Unicode path fix.</p>
+          <span class="cfg">CONFIG_KSU_SUSFS</span>
+        </article>
+        <article class="feat">
+          <span class="idx">03 / MOUNTS</span>
+          <h3>Metamodule hooks</h3>
+          <p>VFS hooks for module mounts. NoMount is bundled; Mountify also works.</p>
+          <span class="cfg">NoMount · Mountify</span>
+        </article>
+        <article class="feat">
+          <span class="idx">04 / SECURITY</span>
+          <h3>Baseband Guard</h3>
+          <p>An LSM that refuses writes to critical partitions and device nodes.</p>
+          <span class="cfg">CONFIG_BBG</span>
+        </article>
+        <article class="feat">
+          <span class="idx">05 / NETWORK</span>
+          <h3>Full network stack</h3>
+          <p>WireGuard, BBRv1/v3, IP Set, IPv6 NAT, conntrack, CIFS, TTL target.</p>
+          <span class="cfg">CONFIG_WIREGUARD · IP_SET</span>
+        </article>
+        <article class="feat">
+          <span class="idx">06 / TRACING</span>
+          <h3>BTF, eBPF, FUSE-BPF</h3>
+          <p>Matching debug info, so tracing tools and module tooling resolve symbols.</p>
+          <span class="cfg">CONFIG_DEBUG_INFO_BTF</span>
+        </article>
+        <article class="feat">
+          <span class="idx">07 / PERF</span>
+          <h3>NTSync + tuning</h3>
+          <p>NT-compatible sync primitives, plus the optional scheduler and I/O patches.</p>
+          <span class="cfg">common/ntsync</span>
+        </article>
+        <article class="feat">
+          <span class="idx">08 / CONTAINERS</span>
+          <h3>DroidSpaces ready</h3>
+          <p>Namespaces and cgroups for Linux containers and chroots on Android.</p>
+          <span class="cfg">Droidspaces-OSS</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ matrix ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="kicker"><span class="num">03</span> Coverage</p>
+          <h2 class="h2" style="margin-top:14px">Every sublevel we have built</h2>
+        </div>
+        <a class="link-arrow" href="builds.html">Filter all builds →</a>
+      </div>
+      <p class="matrix-legend reveal">Newest sublevel · number of images built for that line</p>
+      <div class="matrix-wrap reveal">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th style="width:190px">Kernel line</th>
+              <th>Android 12</th>
+              <th>Android 13</th>
+              <th>Android 14</th>
+              <th>Android 15</th>
+              <th>Android 16</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+      </div>
+      <p class="matrix-foot">
+        <span>Cell shows newest sublevel + number of images for that line.</span>
+        <span>Match the <b>kernel</b> version, not the Android version on your phone.</span>
+        <span>Source: release r22 asset list.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ latest builds ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="kicker"><span class="num">04</span> Most downloaded</p>
+          <h2 class="h2" style="margin-top:14px">Straight from the release page</h2>
+        </div>
+        <p class="muted" style="font-size:14px;max-width:34ch">Zips flash in Kernel Flasher, the KernelSU manager, OrangeFox or TWRP. APKs are the matching managers.</p>
+      </div>
+      <div class="brow-head reveal">
+        <span>file</span><span class="tagcol">root</span><span class="tagcol">built</span><span class="dl">size</span><span></span>
+      </div>
+      <div class="blist reveal" id="latest-builds"></div>
+      <div style="margin-top:26px"><a class="btn" href="builds.html">All 600 kernels + 7 managers →</a></div>
+    </div>
+  </section>
+
+  <!-- ============ install ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="kicker"><span class="num">05</span> Install</p>
+          <h2 class="h2" style="margin-top:14px">Three steps, no PC needed</h2>
+        </div>
+        <a class="link-arrow" href="docs.html">Full guides →</a>
+      </div>
+      <div class="steps reveal">
+        <article class="step">
+          <span class="n">01</span>
+          <h3>Match the kernel version</h3>
+          <p>Check <code>uname -r</code> or your phone's kernel version. A Pixel 8 running Android 17 is still on <code>6.1.x-android14</code> — the androidXX in the kernel string is not your OS version.</p>
+          <span class="icode">6.1.157-android14</span>
+        </article>
+        <article class="step">
+          <span class="n">02</span>
+          <h3>Flash the zip</h3>
+          <p>Download the AnyKernel3 zip for that version and flavor, then flash it in Kernel Flasher, the KernelSU manager, or recovery. Don't interrupt it.</p>
+          <span class="icode">…-KernelSU-Next-AnyKernel3.zip</span>
+        </article>
+        <article class="step">
+          <span class="n">03</span>
+          <h3>Manager, then SUSFS</h3>
+          <p>Install the manager APK from the same release, reboot, add the susfs4ksu module and reboot again. The manager should report your new kernel and “Working”.</p>
+          <span class="icode">KernelSU_Next_v3.4.2…apk</span>
+        </article>
+      </div>
+      <div class="callout reveal" style="margin-top:22px">
+        <p><strong>Flashing is at your own risk.</strong> Back up your <code>boot</code> partition — or at minimum keep a stock <code>boot.img</code> — before you start. Wild Kernels is not responsible for bricked devices or lost data.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ projects ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="kicker"><span class="num">06</span> The projects</p>
+          <h2 class="h2" style="margin-top:14px">One org, four kernel trees</h2>
+        </div>
+        <a class="link-arrow" href="projects.html">All repositories →</a>
+      </div>
+      <div class="cards reveal">
+        <a class="card" href="https://github.com/WildKernels/GKI_KernelSU_SUSFS" target="_blank" rel="noopener">
+          <div class="card-top">
+            <img class="card-logo" src="android.svg" alt="" width="42" height="42" loading="lazy">
+            <div><h3>Wild GKI</h3><div class="sub">Generic · 5.10 → 6.12</div></div>
+          </div>
+          <p>Built from Google's GKI common trees, so one image covers every device on that kernel line. The main project: 600 images, five lines, three root flavors.</p>
+          <div class="card-meta">
+            <span class="pill hot">★ 1,764</span><span class="pill">r22</span><span class="pill">629 files</span><span class="pill">GPL-3.0</span>
+          </div>
+        </a>
+        <a class="card" href="https://github.com/WildKernels/OnePlus_KernelSU_SUSFS" target="_blank" rel="noopener">
+          <div class="card-top">
+            <img class="card-logo" src="oneplus.svg" alt="" width="42" height="42" loading="lazy">
+            <div><h3>OnePlus</h3><div class="sub">Oppo · Realme · per device</div></div>
+          </div>
+          <p>Per-device builds from OnePlus OSS sources: HMBIRD SCX schedulers, BBRv3, CAKE/PIE qdiscs, LTO and the memory and I/O patch sets. Maintained by fatalcoder524.</p>
+          <div class="card-meta">
+            <span class="pill hot">★ 749</span><span class="pill">v2.4.0-r1</span><span class="pill">169 files</span>
+          </div>
+        </a>
+        <a class="card" href="https://github.com/WildKernels/Samsung_KernelSU_SUSFS" target="_blank" rel="noopener">
+          <div class="card-top">
+            <img class="card-logo" src="samsung.svg" alt="" width="42" height="42" loading="lazy">
+            <div><h3>Samsung</h3><div class="sub">Galaxy S · A · Tab · One UI 6–8.5</div></div>
+          </div>
+          <p>Built from Samsung sources and manifests, with the full feature string in the filename: NM, BBG, BBRv3, DS, NTS, IPv6/IP-set, TTL and UF. Maintained by jimsterino98.</p>
+          <div class="card-meta">
+            <span class="pill hot">★ 60</span><span class="pill">2.3.0-r6</span><span class="pill">62 files</span>
+          </div>
+        </a>
+        <a class="card" href="https://github.com/WildKernels/Sultan_KernelSU_SUSFS" target="_blank" rel="noopener">
+          <div class="card-top">
+            <img class="card-logo round" src="sultan.jpg" alt="" width="42" height="42" loading="lazy">
+            <div><h3>Sultan / Pixel</h3><div class="sub">Tensor · Pixel 6–9</div></div>
+          </div>
+          <p>kerneltoast's Pixel trees with Wild KSU and SUSFS applied, shipping stock and rooted variants for zuma, zumapro and gs201 side by side.</p>
+          <div class="card-meta">
+            <span class="pill hot">★ 189</span><span class="pill">v2.0.0-r12</span><span class="pill">Tensor</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ community ============ -->
+  <section class="band" style="border-bottom:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="kicker"><span class="num">07</span> Community</p>
+          <h2 class="h2" style="margin-top:14px">Ask in the group, not a DM</h2>
+        </div>
+        <p class="muted" style="font-size:14.5px;max-width:34ch">Support happens in public so everyone gets the answer. DMs are for security issues and business.</p>
+      </div>
+      <div class="social reveal">
+        <a class="social-item" href="https://t.me/WildKernels" target="_blank" rel="noopener">
+          <span class="ico">◉</span>
+          <h3>Telegram group</h3>
+          <p>Build announcements, flashing help, test builds before release.</p>
+          <span class="at">@WildKernels</span>
+        </a>
+        <a class="social-item" href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/wiki" target="_blank" rel="noopener">
+          <span class="ico">▤</span>
+          <h3>Wiki &amp; docs</h3>
+          <p>Installation, magiskboot, post-install checks and every build option explained.</p>
+          <span class="at">GKI_KernelSU_SUSFS/wiki</span>
+        </a>
+        <a class="social-item" href="https://github.com/WildKernels" target="_blank" rel="noopener">
+          <span class="ico">◆</span>
+          <h3>Source &amp; issues</h3>
+          <p>Fork it, build your own variant in Actions, or open an issue with a log.</p>
+          <span class="at">github.com/WildKernels</span>
+        </a>
+      </div>
+      <div class="team reveal">
+        <a class="member" href="https://github.com/TheWildJames" target="_blank" rel="noopener">
+          <img src="avatar_thewildjames.png" alt="" loading="lazy"><span><b>TheWildJames</b><span>owner · GKI</span></span>
+        </a>
+        <a class="member" href="https://github.com/fatalcoder524" target="_blank" rel="noopener">
+          <img src="avatar_fatalcoder524.png" alt="" loading="lazy"><span><b>fatalcoder524</b><span>OnePlus</span></span>
+        </a>
+        <a class="member" href="https://github.com/jimsterino98" target="_blank" rel="noopener">
+          <img src="avatar_jimsterino98.png" alt="" loading="lazy"><span><b>jimsterino98</b><span>Samsung</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="foot-mark" viewBox="0 0 1000 112" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <text x="0" y="96" textLength="1000" lengthAdjust="spacingAndGlyphs">WILD KERNELS</text>
+    </svg>
+    <div class="foot-cols">
+      <div>
+        <h4>Wild Kernels</h4>
+        <p>Custom Android kernels with KernelSU &amp; SUSFS. Built from AOSP, OnePlus, Samsung and Sultan sources. Everything is GPL-3.0 and built in public GitHub Actions.</p>
+      </div>
+      <div>
+        <h4>Builds</h4>
+        <a href="builds.html">Browse builds</a>
+        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/releases">Latest release</a>
+        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS/actions">CI runs</a>
+        <a href="docs.html">Install guide</a>
+      </div>
+      <div>
+        <h4>Projects</h4>
+        <a href="https://github.com/WildKernels/GKI_KernelSU_SUSFS">GKI</a>
+        <a href="https://github.com/WildKernels/OnePlus_KernelSU_SUSFS">OnePlus</a>
+        <a href="https://github.com/WildKernels/Samsung_KernelSU_SUSFS">Samsung</a>
+        <a href="https://github.com/WildKernels/Sultan_KernelSU_SUSFS">Sultan / Pixel</a>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="https://t.me/WildKernels">Telegram group</a>
+        <a href="https://t.me/TheWildJames">@TheWildJames</a>
+        <a href="https://github.com/WildKernels">GitHub</a>
+        <a href="contact.html">Contact &amp; support</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>GPL-3.0 · upstream credits to KernelSU, susfs4ksu, AnyKernel3, DroidSpaces, Baseband Guard and Sultan.</span>
+      <span>Not responsible for bricked devices. Back up first.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="to-top" href="#main" aria-label="Back to top">↑</a>
+<script src="data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

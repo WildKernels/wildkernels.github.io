@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Builds — Wild Kernels</title>
+<meta name="description" content="Browse every Wild Kernels build: GKI kernels from 5.10 to 6.12, OnePlus, Samsung and Sultan/Pixel trees, with matching manager APKs.">
+<meta name="theme-color" content="#04100d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/showcase.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="index.html"><img src="logo.jpg" alt="">Wild Kernels</a>
+    <nav>
+      <a href="builds.html" aria-current="page">Builds</a>
+      <a href="docs.html">Docs</a>
+      <a href="projects.html">Projects</a>
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+    </nav>
+    <a class="btn primary sm" href="#bgrid">Jump to list</a>
+  </div>
+</header>
+
+<div class="wrap page-head">
+  <p class="kicker">Build browser</p>
+  <h1>Every image we ship.</h1>
+  <p>Pulled from the live release asset lists. Pick a tree, narrow by kernel line or device, and take the zip. Sizes and download counts come straight from GitHub.</p>
+</div>
+
+<div class="wrap">
+  <div class="tabs" id="repo-tabs" role="tablist" aria-label="Kernel tree">
+    <button class="tab" role="tab" data-repo="gki" aria-selected="true">GKI 2.0 <span>629</span></button>
+    <button class="tab" role="tab" data-repo="oneplus" aria-selected="false">OnePlus <span>169</span></button>
+    <button class="tab" role="tab" data-repo="samsung" aria-selected="false">Samsung <span>62</span></button>
+    <button class="tab" role="tab" data-repo="sultan" aria-selected="false">Sultan / Pixel <span>6</span></button>
+  </div>
+
+  <div class="filters">
+    <div class="field"><label for="f1" id="l1">Kernel line</label><select id="f1"></select></div>
+    <div class="field"><label for="f2" id="l2">Android target</label><select id="f2"></select></div>
+    <div class="field"><label for="froot" id="lroot">Root flavor</label><select id="froot"></select></div>
+    <div class="field wide"><label for="q">Find in file names</label><input id="q" type="search" placeholder="e.g. 6.12 android16" autocomplete="off"></div>
+  </div>
+
+  <div class="result-bar">
+    <span class="count" id="count">—</span>
+    <span class="tools">
+      <button class="clear" id="clear" type="button" hidden>clear filters</button>
+      <span class="release" id="release-meta"></span>
+      <select id="sort" class="sortsel" aria-label="Sort">
+        <option value="dl">most downloaded</option>
+        <option value="new">newest version</option>
+        <option value="name">file name A–Z</option>
+      </select>
+    </span>
+  </div>
+
+  <div class="bgrid" id="bgrid"></div>
+  <div class="empty-state" id="empty" hidden>
+    <h3>Nothing matches those filters</h3>
+    <p>Try a wider kernel line, or clear the search field.</p>
+  </div>
+  <div class="more" id="more" hidden><button class="btn">load more</button></div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>Wild Kernels · GPL-3.0 · built in public</span>
+    <span class="links">
+      <a href="https://t.me/WildKernels" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/WildKernels" target="_blank" rel="noopener">GitHub</a>
+      <a href="docs.html">Docs</a>
+      <a href="projects.html">Projects</a>
+    </span>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="stats.js"></script>
+<script src="assets/showcase.js"></script>
+</body>
+</html>
